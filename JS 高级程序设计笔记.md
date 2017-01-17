@@ -71,4 +71,9 @@ function hasPrototypeProperty（object， name）{
 > 设置新的值时，document.cookie设置成新的cookie字符串  
 2、ie用户数据
 使用css在某个特定元素上指定userData
+3、web存储机制
+> storage  
+> sessionStorage  
+> globalStorage  
+> localStorage  
 
