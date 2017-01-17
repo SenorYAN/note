@@ -59,5 +59,9 @@ function hasPrototypeProperty（object， name）{
 第十章
 第十一章
 <!--[if lt IE 9]>
-    <script src="html5shiv.googlecode.com_svn_trunk_html5.js"><_script>
+    <script src="html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+第二十三章
+1、cookie个数限制
+ff50, opera30, safari&chrome 无限制
