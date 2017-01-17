@@ -63,5 +63,12 @@ function hasPrototypeProperty（object， name）{
     <![endif]-->
 
 第二十三章
-1、cookie个数限制
-ff50, opera30, safari&chrome 无限制
+1、cookie
+> 个数限制：ff50, opera30, safari&chrome 无限制；  
+>  名称不分大小写；  
+> 组成：名称、值、域、路径、失效时间、安全标志（https？）  
+> js中的cookie都是经过url编码，需要用decodeURIComponent解码，encodeURIComponent编码  
+> 设置新的值时，document.cookie设置成新的cookie字符串  
+2、ie用户数据
+使用css在某个特定元素上指定userData
+
