@@ -76,4 +76,6 @@ function hasPrototypeProperty（object， name）{
 > sessionStorage  
 > globalStorage  
 > localStorage  
+> 	localStorage在HTML5中取代了globalStorage，不能给它制定任何访问规则，访问同一个localStorage必须来自同一个域名，同一协议，同一端口。  
+> 	localStorage是storage的一个实例使用方法类似于sessionStorage  
 
