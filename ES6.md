@@ -33,7 +33,7 @@ promise.then(function(value) {
 ```
 function timeout(ms){
 	return new Promise(function(resolve, reject) {
-		setTimeout(resolve, ms, 'done');,//这里的第三个参数作为第一个函数的参数传入，所以被resolve输出
+		setTimeout(resolve, ms, 'done');,//这里的第三个参数作为第一个函数的参数传入，所以被resolve输出.
 	});
 }
 
