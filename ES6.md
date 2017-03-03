@@ -113,3 +113,16 @@ p2
 ```
 
 p1是一个Promise，3秒之后变为rejected。p2的状态在1秒之后改变，resolve方法返回的是p1。此时，由于p2返回的是另一个Promise，所以后面的then语句都变成针对后者（p1）。又过了2秒，p1变为rejected，导致触发catch方法指定的回调函数
+
+* 链式写法
+then方法返回的的是一个新的promise实例（非原来）
+```
+getJSON("/post/1.json").then(function(post) {
+  return getJSON(post.commentURL);
+}).then(function funcA(comments) {
+  console.log("Resolved: ", comments);
+}, function funcB(err){
+  console.log("Rejected: ", err);
+});
+```
+
