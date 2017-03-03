@@ -1,4 +1,4 @@
-# ES6
+# ES6-promise
 ## Promise
 * 状态分三种
 对象的状态不受外界影响。Promise对象代表一个异步操作，有三种状态：Pending（进行中）、Resolved（已完成，又称 Fulfilled）和Rejected（已失败）。
