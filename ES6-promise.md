@@ -130,3 +130,10 @@ getJSON(“/post/1.json”).then(function(post) {
 ## 3. Promise.prototype.catch()
 catch(rejection)方法是then(null,rejection)的别称，仅仅当发生错误时执行，catch的存在是将错误回调函数从then()方法中剥离出来。
 Promise 对象的错误具有“冒泡”性质，会一直向后传递，直到被捕获为止。也就是说，错误总是会被下一个catch语句捕获。
+
+## 4. Promise.prototype.all()
+用于将多个Promise实例包装成一个新的Promise实例。如果内部参数不是Promise实例，就调用Promise.resolve()将参数转换为Promise实例。
+`var p = Promise.all([p1, p2, p3]);//接受一个Promise数组作为参数`
+p的状态由p1、p2、p3决定，呈现&关系，fulfilled对应1，rejected对应0，分成两种情况：
+（1）只有p1、p2、p3的状态都变成fulfilled，p的状态才会变成fulfilled，此时p1、p2、p3的返回值组成一个数组，传递给p的回调函数。
+（2）只要p1、p2、p3之中有一个被rejected，p的状态就变成rejected，此时第一个被reject的实例的返回值（rejected的顺序有没有类似与操作的顺序？），会传递给p的回调函数。
