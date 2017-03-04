@@ -8,4 +8,11 @@
     -o-transform: translateY(-50%);
     transform: translateY(-50%);
 }
+
+flex布局
+.verticalcnter容器{
+	align-items: center; /*定义body的元素垂直居中*/
+  justify-content: center; /*定义body的里的元素水平居中*/
+}
 ```
+
