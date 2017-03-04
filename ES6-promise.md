@@ -126,3 +126,7 @@ getJSON(“/post/1.json”).then(function(post) {
   console.log(“Rejected: “, err);
 });
 ```
+
+## 3. Promise.prototype.catch()
+catch(rejection)方法是then(null,rejection)的别称，仅仅当发生错误时执行，catch的存在是将错误回调函数从then()方法中剥离出来。
+Promise 对象的错误具有“冒泡”性质，会一直向后传递，直到被捕获为止。也就是说，错误总是会被下一个catch语句捕获。
