@@ -33,3 +33,28 @@ pre {
     word-wrap: break-word;
 }
 ```
+
+4. 文字模糊
+```
+	 color: transparent;
+   text-shadow: 0 0 5px rgba(0,0,0,0.5);
+```
+
+5. css动态省略号
+```
+.loading:after {
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: bottom;
+    animation: ellipsis 2s infinite;
+    content: "\2026"; /* ascii code for the ellipsis character */
+}
+@keyframes ellipsis {
+    from {
+        width: 2px;
+    }
+    to {
+        width: 15px;
+    }
+}
+```
