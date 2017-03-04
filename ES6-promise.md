@@ -1,5 +1,5 @@
 # ES6-promise
-## Promise
+## 1. Promise
 * 状态分三种
 对象的状态不受外界影响。Promise对象代表一个异步操作，有三种状态：Pending（进行中）、Resolved（已完成，又称 Fulfilled）和Rejected（已失败）。
 
@@ -99,30 +99,30 @@ getJSON("/posts.json").then(function(json) {
 promise作为resolve和reject的参数
 ```
 var p1 = new Promise(function (resolve, reject) {
-  setTimeout(() => reject(new Error('fail')), 3000)
+    setTimeout(() => reject(new Error('fail')), 3000)
 })
-
+        
 var p2 = new Promise(function (resolve, reject) {
-  setTimeout(() => resolve(p1), 1000)
+    setTimeout(() => resolve(p1), 1000)
 })
 
-p2
-  .then(result => console.log(result))
-  .catch(error => console.log(error))
-// Error: fail
+p2.then(result => console.log(result)) //p1 is rejected, p2 is the same as p1
+.catch(error => console.log(error)) // Error: fail
 ```
 
 p1是一个Promise，3秒之后变为rejected。p2的状态在1秒之后改变，resolve方法返回的是p1。此时，由于p2返回的是另一个Promise，所以后面的then语句都变成针对后者（p1）。又过了2秒，p1变为rejected，导致触发catch方法指定的回调函数
 
+
+## 2. Promise.prototype.then()
+then方法为promise添加状态发生改变的回调函数，返回一个promise实例的话采用链式写法
+
 * 链式写法
-then方法返回的的是一个新的promise实例（非原来）
 ```
-getJSON("/post/1.json").then(function(post) {
+getJSON(“/post/1.json”).then(function(post) {
   return getJSON(post.commentURL);
 }).then(function funcA(comments) {
-  console.log("Resolved: ", comments);
+  console.log(“Resolved: “, comments);
 }, function funcB(err){
-  console.log("Rejected: ", err);
+  console.log(“Rejected: “, err);
 });
 ```
-
