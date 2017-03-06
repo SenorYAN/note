@@ -137,3 +137,18 @@ Promise 对象的错误具有“冒泡”性质，会一直向后传递，直到
 p的状态由p1、p2、p3决定，呈现&关系，fulfilled对应1，rejected对应0，分成两种情况：
 （1）只有p1、p2、p3的状态都变成fulfilled，p的状态才会变成fulfilled，此时p1、p2、p3的返回值组成一个数组，传递给p的回调函数。
 （2）只要p1、p2、p3之中有一个被rejected，p的状态就变成rejected，此时第一个被reject的实例的返回值（rejected的顺序有没有类似与操作的顺序？），会传递给p的回调函数。
+
+## 5.Promise.race()
+Promise.race()和Promise.all()同样是将多个Promise实例包装成一个新的Promise实例，但是只要实例数组中有一个实例率先改变状态，p的状态就跟着改变。那个率先改变的 Promise 实例的返回值，就传递给新实例的回调函数。
+```
+  const p = Promise.race([
+          fetch('/resource-that-may-take-a-while'),
+          new Promise(function (resolve, reject) {
+            setTimeout(() => reject(new Error('request timeout')), 5000)
+          })
+        ]);
+   p.then(response => console.log(response));
+   p.catch(error => console.log(error));
+```
+
+上面代码中，如果5秒之内fetch方法无法返回结果，变量p的状态就会变为rejected，从而触发catch方法指定的回调函数。
