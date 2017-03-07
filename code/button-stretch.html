@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+     .button{
+         position: relative;
+         width: 492px;
+         margin-left: 100px;
+         min-height: 100px;
+         line-height: 100px;
+         text-align: center;
+         background-color: orange;
+         color: transparent;
+         text-shadow: 0 0 2px rgba(0,0,0,0.5);
+         border: 4px solid #131010;
+         border-width: 4px 0;
+     }
+     .button h3{
+         overflow: hidden;
+         text-overflow: ellipsis;
+         white-space: nowrap;
+         margin: 0;
+     }
+     .button:before, .button:after{
+         width: 100px;
+         content: '·';
+         position: absolute;
+         height: 100%;
+         background: orange;
+         top: -4px;
+         border: 4px solid #101010;
+     }
+     .button:before{
+         content: '';
+         left: -104px;
+         border-radius: 50% 0 0 50%;
+         border-right:0;
+     }
+     .button:after{
+         content: '';
+         right: -104px;
+         border-radius: 0 50% 50% 0;
+         border-left:0;
+         z-index: -1;
+     }
+     .button .hidden{
+         width: 100px;
+         position: absolute;
+         height: 100%;
+         top: -4px;
+         right:-104px;
+         border: 4px solid transparent;
+         cursor: e-resize;
+     }
+    </style>
+</head>
+
+<body>
+    <div class="button">
+        <h3>按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮</h3>
+        <div class="hidden"></div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        var Stertch={};
+        (function (win,doc,$) {
+            function buttonStertch() {
+                this._init();
+            }
+
+            $.extend(buttonStertch.prototype,{
+                _init:function () {
+                    var self = this;
+                    self._initDomEvent();
+                    return self;
+                },
+                _initDomEvent:function () {
+                    var self = this;
+                    this._initButtonDrag();
+                    return self;
+                },
+                _initButtonDrag:function () {
+                    var self = this;
+                    var $bt = $(".button");
+                    var $bt_hidden = $(".button .hidden");
+
+                    var dragStartPagePosition,
+                            dragStartButtonWidth;//开始拖动位置
+
+                    $bt.on('click',function (e) {
+                        e.preventDefault();
+                        alert($bt.find('h3').html());
+                    })
+
+                    function mousemoveHandle(e) {
+                        e.preventDefault();
+                        console.log('move');
+                        if(dragStartPagePosition == null){
+                            return;
+                        }
+                        self.stertchTo((dragStartButtonWidth + e.pageX - dragStartPagePosition)<292?292:(dragStartButtonWidth + e.pageX - dragStartPagePosition));
+                    }
+                    $bt_hidden.on('mousedown',function (e) {
+                        e.preventDefault();
+                        console.log('down');
+                        dragStartPagePosition = e.pageX;
+                        dragStartButtonWidth = $bt.width();
+                        $(doc).on('mousemove.drag', mousemoveHandle).on('mouseup.drag',function (e) {
+                            e.preventDefault();
+                            console.log("up");
+                            $(doc).off('.drag');
+                        })
+                    })
+                },
+                stertchTo:function(wid){
+                    var $bt = $(".button");
+                    $bt.width(wid);
+                }
+            });
+            Stertch.buttonStertch = buttonStertch;
+        })(window,document,jQuery);
+
+        new Stertch.buttonStertch();
+    </script>
+</body>
+
+</html>
