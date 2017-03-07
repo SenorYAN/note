@@ -73,7 +73,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-html { height: 101%; }//防止高度滚动条页面抖动
+html { height: 101%; }/*防止高度滚动条页面抖动*/
 body { font-size: 62.5%; line-height: 1; font-family: Arial, Tahoma, sans-serif; }
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
 ol, ul { list-style: none; }
