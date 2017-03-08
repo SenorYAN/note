@@ -24,7 +24,7 @@
          margin: 0;
      }
      .button:before, .button:after{
-         width: 100px;
+         width: 50px;
          content: '·';
          position: absolute;
          height: 100%;
@@ -34,23 +34,23 @@
      }
      .button:before{
          content: '';
-         left: -104px;
-         border-radius: 50% 0 0 50%;
+         left: -54px;
+         border-radius: 54px 0 0 54px;
          border-right:0;
      }
      .button:after{
          content: '';
-         right: -104px;
-         border-radius: 0 50% 50% 0;
-         border-left:0;
+         right: -54px;
+         border-radius: 0 54px 54px 0;
+         border-left: 0;
          z-index: -1;
      }
      .button .hidden{
-         width: 100px;
+         width: 50px;
          position: absolute;
          height: 100%;
          top: -4px;
-         right:-104px;
+         right:-54px;
          border: 4px solid transparent;
          cursor: e-resize;
      }
@@ -112,6 +112,8 @@
                             console.log("up");
                             $(doc).off('.drag');
                         })
+                    }).on('click',function (e) {
+                        e.stopPropagation();
                     })
                 },
                 stertchTo:function(wid){
