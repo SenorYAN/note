@@ -126,3 +126,10 @@ font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucid
 
 ## 10、自定义文本选择
 `::selection{background: ??? }`
+
+## 11、隐藏logo文字
+`    text-indent: -9999px;`
+title属性里写和背景图片内容一样的文字
+
+## 12、border画三角
+宽高设为0，上下左右border设为一定宽度，不要的方向transparent
