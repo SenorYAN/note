@@ -240,3 +240,52 @@ function somePromiseAPI() {
 ```
 
 ![](ES6-promise/6B77CD3D-54A1-4298-AEBA-492F394E376E.png)
+
+## 2.2 catch() 与 then(null, ...) 根据使用场景并非完全等价
+```
+    somePromise().then(function(){
+        return someOtherPromise();
+    }).catch(function(err){
+        //error
+    });
+    ///////////////////////////////
+    somePromise().then(function(){
+        return someOtherPromise();
+    },function(err){
+        //error
+    });
+```
+
+当你使用 then(resolveHandler, rejectHandler) 这种形式时，rejectHandler 并不会捕获由 resolveHandler 引发的异常。最好不使用then()的第二个参数，而是总是使用catch()。
+
+## 2.3 promises factories
+```
+ function executeSequentially(promiseFactories){
+   var result = Promise.resolve();
+   promiseFactories,forEach(function (promiseFactory){
+      result = result.then(promiseFactory)
+   });
+   return result;
+}
+function promiseFactory(){
+    return somethingThatCreatesAPromise();
+}
+```
+
+这是因为一个 promise factory 在被执行之前并不会创建 promise。它就像一个 then 函数一样，而实际上，它们就是完全一样的东西。如果你查看上面的 executeSequentially() 函数，然后想象 myPromiseFactory 被包裹在 result.then(...) 之中，也许你脑中的小灯泡就会亮起。在此时此刻，对于 promise 你就算是悟道了。
+
+## 2.4 promises 穿透
+```
+Promise.resolve(‘foo’).then(Promise.resolve(‘bar’)).then(function(result){
+        console.log(result);
+        });
+```
+then()接受非函数的参数时，会解释为then(null)，这就导致前一个Promise的结果穿透到下面一个Promise。
+正确写法：
+```
+        Promise.resolve(‘foo’).then(function(){
+        return Promise.resolve(‘bar’);
+        }).then(function(result){
+        console.log(result);
+        });
+```
