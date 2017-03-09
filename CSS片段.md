@@ -133,3 +133,60 @@ title属性里写和背景图片内容一样的文字
 
 ## 12、border画三角
 宽高设为0，上下左右border设为一定宽度，不要的方向transparent
+
+## 13、列文本
+```
+  text-align: justify;
+    -moz-column-count: 3;
+    -moz-column-gap: 12px;
+    -moz-column-rule: 1px solid #c4c8cc;
+```
+
+## 14、content的attr
+```
+a[data-tooltip]:before {
+    background: #222;
+    background: hsla(0,0%,0%,.85);
+    color: #f6f6f6;
+    content: attr(data-tooltip);
+    display: none;
+    font-family: sans-serif;
+    font-size: 14px;
+    height: 32px;
+    left: 0;
+    line-height: 32px;
+    padding: 0 15px;
+    position: absolute;
+    text-shadow: 0 1px 1px hsla(0,0%,0%,1);
+    white-space: nowrap;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+}
+```
+
+## 15、禁用移动Webkit的选择高亮
+```
+body {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+```
+
+## 16、渐变
+### 线性
+```
+background: linear-gradient(direction, color-stop1, color-stop2, ...);
+
+background: linear-gradient(angle, color-stop1, color-stop2);
+```
+
+### 径向
+ ` background: radial-gradient(60% 55%, closest-side,blue,green,yellow,black);`
+
+还可以用at 0px 0px 设置渐变圆心
