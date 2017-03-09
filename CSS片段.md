@@ -82,3 +82,9 @@ table { border-collapse: collapse; border-spacing: 0; }
 img { border: 0; max-width: 100%; }
 p { font-size: 1.2em; line-height: 1.0em; color: #333; }
 ```
+
+* 7、css圆角
+1）不建议使用百分比，不是所有浏览器都支持。
+2）不分组时，设置1/2/3/4个值分别对应四个角，水平和竖直半径相同。
+3）分组时，第一组对应水平半径，第二组对应竖直半径。
+4）单个圆角使用border-top／bottom-left／right-radius设置，1～2个值，分别对应水平和竖直半径。
