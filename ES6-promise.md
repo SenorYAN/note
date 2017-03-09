@@ -289,3 +289,8 @@ then()接受非函数的参数时，会解释为then(null)，这就导致前一�
         console.log(result);
         });
 ```
+
+## 2.5 Promise.all()
+Promise.all()以一个Promise数组作为输入，返回一个新的Promise，特点在于它会并行执行数组中的每个Promise，并且每个Promise都返回后才返回结果数组，这就数组的异步版map/forEach方法。但是如果需要返回两个不相关的结果，使用Promise.all()可以产生两个不相关的数组结果；但是如果后一结果要依靠前一个结果产生，此时在Promise里使用嵌套也就可以的。
+
+[Promise初级与进阶—都在这了 - Web Learning Step by Step - SegmentFault](https://segmentfault.com/a/1190000008548794) 
