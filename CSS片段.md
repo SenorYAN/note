@@ -1,6 +1,6 @@
 # CSS片段
 ## 1、垂直居中：相对定位，top使得div下移50%，transform自身上移50%，或者用margin-top：-50%高
-```
+```css
 .verticalcenter{
     position: relative;
     top: 50%;
@@ -18,14 +18,14 @@ flex布局
 
 ## 2、CSS：表格列宽自适用
 对于表格，当谈到调整列宽时，是比较痛苦的。然后，这里有一个可以使用的技巧：给td元素添加white-space: nowrap;能让文本正确的换行
-```
+```css
 td {
     white-space: nowrap;
 }
 ```
 
 ## 3、包裹长文本
-```
+```css
 pre {
     white-space: pre-line;
     word-wrap: break-word;
@@ -33,13 +33,13 @@ pre {
 ```
 
 ## 4、文字模糊
-```
+```css
 	 color: transparent;
    text-shadow: 0 0 5px rgba(0,0,0,0.5);
 ```
 
 ## 5、css动态省略号
-```
+```css
 .loading:after {
     overflow: hidden;
     display: inline-block;
@@ -58,7 +58,7 @@ pre {
 ```
 
 ## 6、样式重制
-```
+```css
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
   padding: 0;
@@ -90,14 +90,14 @@ p { font-size: 1.2em; line-height: 1.0em; color: #333; }
 4. 单个圆角使用border-top／bottom-left／right-radius设置，1～2个值，分别对应水平和竖直半径。
 
 ## 8、清除浮动
-```
+```css
 .clearfix:after { content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }
 .clearfix { display: inline-block; }
 html[xmlns] .clearfix { display: block; }
 * html .clearfix { height: 1%; }
 ```
 
-```
+```css
 .clearfix:before, .container:after { content: ""; display: table; }
 .clearfix:after { clear: both; }
 /* IE 6/7 */
@@ -105,7 +105,7 @@ html[xmlns] .clearfix { display: block; }
 ```
 
 ## 9、现代字体栈
-```
+```css
 /* Times New Roman-based serif */
 font-family: Cambria, "Hoefler Text", Utopia, "Liberation Serif", "Nimbus Roman No9 L Regular", Times, "Times New Roman", serif;
 /* A modern Georgia-based serif */
@@ -135,15 +135,15 @@ title属性里写和背景图片内容一样的文字
 宽高设为0，上下左右border设为一定宽度，不要的方向transparent
 
 ## 13、列文本
-```
-  text-align: justify;
+```css
+  ··text-align: justify;
     -moz-column-count: 3;
     -moz-column-gap: 12px;
     -moz-column-rule: 1px solid #c4c8cc;
 ```
 
 ## 14、content的attr
-```
+```css
 a[data-tooltip]:before {
     background: #222;
     background: hsla(0,0%,0%,.85);
@@ -167,7 +167,7 @@ a[data-tooltip]:before {
 ```
 
 ## 15、禁用移动Webkit的选择高亮
-```
+```css
 body {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -180,7 +180,7 @@ body {
 
 ## 16、渐变
 ### 线性
-```
+```css
 background: linear-gradient(direction, color-stop1, color-stop2, ...);
 
 background: linear-gradient(angle, color-stop1, color-stop2);
