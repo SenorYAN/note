@@ -22,3 +22,47 @@ console.log(parseInt("1234S234")); // 1234
 	console.log(1 + - + + + - + 1); //2
 	console.log(1 + 0 - 0 + 0 + 0 + 0 - 0 + 1); //2
 ```
+
+## 3、对象
+* delete操作符，删除不存在的属性不会报错
+* hasOwnPorperty(属性)只能判断是否是自有属性，in会检查是否是自由属性或者原型链中
+* Object.assign() ，必须是自由属性
+* Object.defineProperty(obj, 属性)
+* Object.getOwnPropertyName/Descript(obj, 属性,)
+
+## 4、数组
+* filter方法，参数为function，筛选符合某种条件的数组元素，每一项通过是否返回true判断是否择掉
+```javascript
+var arr = [5,3,4,2,3,5,6,4,3,2];
+var unique = arr => {
+    var res ={};
+    return arr.filter(n => {
+        res[n] = (res[n]||0) +1;
+        return res[n] < 2;
+    }).sort((a,b) => a-b);
+}
+console.log(unique(arr)); // [2,3,4,5,6]
+```
+* splice返回的是被删除的部分！
+* reduce方法迭代！
+```javascript
+var flattened = [[0, 1], [2, 3], [4, 5]].reduce(
+  ( acc, cur ) => acc.concat(cur),
+  []
+);
+```
+* apply函数的参数二是个数组，里面每一个元素将作为方法的参数
+```javascript
+	Array.prototype.concat.apply([], arr)
+	//将arr里面的每个元素concat到[]
+```
+* Object.toString().call()来判断类型
+```javascript
+console.log(toString.call([123]));//[object Array]  
+console.log(toString.call('123'));//[object String]  
+console.log(toString.call({a: '123'}));//[object Object]  
+console.log(toString.call(/123/));//[object RegExp]  
+console.log(toString.call(123));//[object Number]  
+console.log(toString.call(undefined));//[object Undefined]  
+console.log(toString.call(null));//[object Null]   
+```
