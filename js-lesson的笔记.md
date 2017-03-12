@@ -66,3 +66,26 @@ console.log(toString.call(123));//[object Number]
 console.log(toString.call(undefined));//[object Undefined]  
 console.log(toString.call(null));//[object Null]   
 ```
+
+## 5、函数
+* arguments不是Array，但是类似Array，但是可以通过slice的方法来转换成数组
+```javascript
+Array.prototype.slice.call(arguments)
+```
+* 匿名函数递归arguments.callee
+```javascript
+var arr = [2,3,4,[2,3,[2,3,4,2],5],3,5,[2,3,[2,3,4,2],2],4,3,6,2];
+const unique = arr => {
+    // 待实现方法体
+    let res = {};
+    return (foo = n => {
+        return n.reduce((a, b) => {
+            return a.concat(Object.prototype.toString.call(b) === '[object Array]' ? foo(b) : b)
+        },[])
+    })(arr).filter(n => {
+        res[n] = (res[n]||0) +1;
+            return res[n] < 2;
+        }).sort((a,b) => a-b);
+}
+console.log(unique(arr)); // [2,3,4,5,6]
+```
