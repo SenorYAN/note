@@ -30,4 +30,10 @@ function foo() {
   var args = Array.from(arguments);
   // ...
 }
+
+// arguments对象
+function foo() {
+  var args = [...arguments];
+}
+
 ```
