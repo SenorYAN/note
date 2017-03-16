@@ -44,3 +44,14 @@ Number.isInteger()//是否为整数，相当于num%1 == 0？
 ```javascript
 Array.apply(null, {length:3})
 ```
+* Array.prototype = [“”]
+Function.prototype = 空函数
+RegExp.prototype = “_(?:)_”
+```javascript
+function(){
+	vals = vals || Array.prototype;
+	fn = fn || Function.prototype;
+	rx = rx || RegExp.prototype;
+}
+//使用prototype不用[]、function(){}、／(?:)／能节约cpu和内存
+```
