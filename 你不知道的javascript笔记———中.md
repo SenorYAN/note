@@ -55,3 +55,23 @@ function(){
 }
 //使用prototype不用[]、function(){}、／(?:)／能节约cpu和内存
 ```
+
+## 4、强制类型转换
+* JSON.stringify在对象中遇到undefined、function、symbol自动将其忽略，在数组中返回null
+```javascript
+	   JSON.stringify( undefined );     JSON.stringify( function(){} );     JSON.stringify(        [1,undefined,function(){},4]     );     JSON.stringify(	      { a:2, b:function(){} }
+	   );
+```
+JSON.stringify可以通过toJSON方法自定义
+JSON.stringify(obj,  replcaer,  space)
+* ToNumber通过检查对象有没有valueOf和toString方法，有的话就强制转换，没有就返回typeError
+* 字符串和数字之间的显式转换
+* ～～用于去掉小数部分
+* Number方法可以转换带有非数字的，parseInt不行，会返回NaN，parseInt的参数只能是字符串，parseInt的第二个参数是确定返回数字的进制的。
+```javascript
+parseInt(1/0, 19) = 18; => I
+//19进制有效数字：0123456789ABCDEFGHI，I=18
+parseInt(0.000008) = 0; => 0.000008
+parseInt(0.0000008) = 8; => 8e-7
+parseInt(false, 16) = 250;  =>fa
+```
