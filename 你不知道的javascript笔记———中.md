@@ -91,3 +91,4 @@ a || b; //a不是真的才会执行b
 * 解构赋值，相同结构／模式的匹配赋值
 * 运算符优先级：“，”最低； && 高于 ||， &比=高，&& > || > ?:
 * 短路：&& 和 || 在从左边操作数判断结果的情况下可以不判断右边
+* ES5-Shim(https://github.com/es-shims/es5-shim) 是 一 个 完 整 的 shim_polyfill 集合，能够为你的项目提供 ES5 基本规范支持。同样，ES6-Shim(https:_/ github.com/es-shims/es6-shim)提供了对 ES6 基本规范的支持。虽然我们可 以通过 shim/polyfill 来填补新的 API，但是无法填补新的语法。可以使用 Traceur(https://github.com/google/traceur-compiler/wiki/GettingStarted) 这 样 的工具来实现新旧语法之间的转换。
