@@ -35,7 +35,21 @@ Git鼓励大量使用分支：
 * 切换分支：git checkout <name>
 * 创建+切换分支：git checkout -b <name>
 * 合并某分支到当前分支：git merge <name>
-* 删除分支：git branch -d <name>`
+* 删除分支：git branch -d <name>`, 如果要强行删除，需要使用命令git branch -D
+
+git stash 可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作, git stash list查看暂存列表，git stash apply恢复暂存前状态／git stash pop恢复暂存前状态并删除暂存
+
+### 多人合作
+* 首先，可以试图用git push origin branch-name推送自己的修改；
+
+* 如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并；
+
+* 如果合并有冲突，则解决冲突，并在本地提交；
+
+* 没有冲突或者解决掉冲突后，再用git push origin branch-name推送就能成功！
+
+* 如果git pull提示“no tracking information”，则说明本地分支和远程分支的链接关系没有创建，用命令git branch --set-upstream branch-name origin/branch-name。
 
 ## 其他命令
 * pwd  `显示当前目录`
+* git check-ignore -v xxx.xx  查看ignore中哪条规则忽略了它
