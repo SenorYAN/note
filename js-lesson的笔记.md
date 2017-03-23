@@ -89,3 +89,32 @@ const unique = arr => {
 }
 console.log(unique(arr)); // [2,3,4,5,6]
 ```
+
+## 6、基本包装类型
+* 基本类型值不是对象，理应不该有方法，但是定义时会对之进行包装，当第二行代码访问 s1 时，访问过程处于一种读取模式，也就是要从内存中读取这个字符串的值。而在读取模式中访问字符串时，后台都会自动完成下列处理。
+1、创建 String 类型的一个实例；
+2、在实例上调用指定的方法；
+3、销毁这个实例。
+```javascript
+/*表面上*/
+var s1 = "some text";
+var s2 = s1.substring(2);
+
+/*实际上*/
+var s1 = new String("some text");
+var s2 = s1.substring(2);
+s1 = null;
+```
+布尔值和数字同样适用。
+
+* 引用类型与基本包装类型的主要区别就是对象的生存期。使用 new 操作符创建的引用类型的实例，在执行流离开当前作用域之前都一直保存在内存中。而自动创建的基本包装类型的对象，则只存在于一行代码的执行瞬间，然后立即被销毁。这意味着我们不能在运行时为基本类型值添加属性和方法。来看下面的例子：
+
+```javascript
+var s1 = "some text";
+s1.color = "red";
+console.log(s1.color);   // undefined
+```
+
+* 基本类型值&构造函数值
+基本类型—》typeof返回此类型—》instanceof返回false
+构造类型—》typeof返回object—》instanceof返回true
