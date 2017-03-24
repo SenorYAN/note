@@ -92,3 +92,18 @@ a || b; //a不是真的才会执行b
 * 运算符优先级：“，”最低； && 高于 ||， &比=高，&& > || > ?:
 * 短路：&& 和 || 在从左边操作数判断结果的情况下可以不判断右边
 * ES5-Shim(https://github.com/es-shims/es5-shim) 是 一 个 完 整 的 shim_polyfill 集合，能够为你的项目提供 ES5 基本规范支持。同样，ES6-Shim(https:_/ github.com/es-shims/es6-shim)提供了对 ES6 基本规范的支持。虽然我们可 以通过 shim/polyfill 来填补新的 API，但是无法填补新的语法。可以使用 Traceur(https://github.com/google/traceur-compiler/wiki/GettingStarted) 这 样 的工具来实现新旧语法之间的转换。
+
+## 6、异步
+* Promise具体ES6-promise
+* Promise
+
+## 7、生成器 
+* 基本语法
+```javascript
+/*此处“*”的位置不限定，可以”function *foo“ 也可以”function*foo“ */
+		function *foo(x) {          var y = x * (yield);  //暂停          return y;      }      var it = foo( 6 );		//启动foo(..) 
+		it.next();      var res = it.next( 7 );      res.value; //42
+```
+
+* yield能返回一个值并输出
+* next方法将暂停的函数进行下一步
