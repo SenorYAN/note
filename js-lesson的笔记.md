@@ -118,3 +118,15 @@ console.log(s1.color);   // undefined
 * 基本类型值&构造函数值
 基本类型—》typeof返回此类型—》instanceof返回false
 构造类型—》typeof返回object—》instanceof返回true
+
+## 7、单体内置对象
+```javascript
+var uri = "http://shijiajie.com/illegal value.htm#start";
+
+console.log(encodeURI(uri));
+// "http://shijiajie.com/illegal%20value.htm#start"
+
+console.log(encodeURIComponent(uri));
+// "http%3A%2F%2Fshijiajie.com%2Fillegal%20value.htm%23start"
+```
+* 使用 encodeURI() 编码后的结果是除了空格之外的其他字符都原封不动，只有空格被替换成了 %20。而 encodeURIComponent() 方法则会使用对应的编码替换所有非字母数字字符。这也正是可以对整个 URI 使用 encodeURI()，而只能对附加在现有 URI 后面的字符串使用 encodeURIComponent() 的原因所在。
