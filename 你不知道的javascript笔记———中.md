@@ -119,3 +119,23 @@ for(var v of a){
 	console.log(v); //2,6,10,14,18
 }
 ```
+
+* 生成器+Promise
+yield可以返回一个promise，通过返回值再next回去
+
+## 8、程序性能
+* 异步的最大作用就是提升性能
+* web worker，从 JavaScript 主程序(或另一个 Worker)中，可以这样实例化一个 Worker:
+```javascript
+var w1 = new Worker( "http://some.url.1/mycoolworker.js" );
+```
+worker和主程序不共享作用域和资源，通过基本的消息机制相互联系。多用于密集型数学计算、大数据集排序、数据处理、高流量网络通信
+* SIMD：单指令多数据，完全看不懂P293
+* asm.js：最大的问题是内存分配、垃圾手机、作用域访问
+
+## 9、性能测试和调优
+```javascript
+	var start = (new Date()).getTime(); //Date.now()
+	/*do something*/	var end = (new Date()).getTime();	console.log( "Duration:", (end - start) );
+```
+不同引擎结果会不一样，不做自己以为快的选择
