@@ -107,3 +107,15 @@ a || b; //a不是真的才会执行b
 
 * yield能返回一个值并输出
 * next方法将暂停的函数进行下一步
+* for of 遍历和Symbol.iterator修改默认遍历
+```javascript
+var a = [1,3,5,7,9];
+a[Symbol.iterator] = function*() {
+		for(var key in this){
+			yield this[key] * 2;
+		}
+}
+for(var v of a){
+	console.log(v); //2,6,10,14,18
+}
+```
