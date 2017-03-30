@@ -163,3 +163,80 @@ Element 节点表示文档中的所有 HTML 或 XML 元素，可以用来操作�
 访问 DOM 的操作在多数情况下都很直观，不过在处理 <script> 和 <style> 元素时还是存在一些复杂性。由于这两个元素分别包含脚本和样式信息，因此浏览器通常会将它们与其他元素区别对待。这些区别导致了在针对这些元素使用 innerHTML 时，以及在创建新元素时的一些问题。
 
 * 理解 DOM 的关键，就是理解 DOM 对性能的影响。DOM 操作往往是 JavaScript 程序中开销最大的部分，而因访问 NodeList 导致的问题为最多。NodeList 对象都是“动态的”，这就意味着每次访问 NodeList 对象，都会运行一次查询。有鉴于此，最好的办法就是尽量减少 DOM 操作。
+
+## 10、事件
+* DOM1: xxx.onclick
+* DOM2: xxx.addEventListener / xxx.removeEventListener,使用 DOM2 级方法添加事件处理程序的主要好处是可以添加多个事件处理程序。通过 addEventListener() 添加的事件处理程序只能使用 removeEventListener() 来移除；移除时传入的参数与添加处理程序时使用的参数相同。这也意味着通过 addEventListener() 添加的匿名函数将无法移除。
+* IE中的事件：attachEvent、detachEvent
+```javascript
+var EventUtil = {
+    /**
+     * 添加事件处理程序
+     * @param {Element} element - 要操作的元素
+     * @param {String} type - 事件名称
+     * @param {Function} handler - 事件处理程序函数
+     */
+    addHandler: function (element, type, handler) {
+        if (element.addEventListener) {//DOM2级事件处理程序
+            element.addEventListener(type, handler, false);
+        } else if (element.attachEvent) {//IE事件处理程序
+            element.attachEvent('on' + type, handler);
+        } else {//DOM0级事件处理程序
+            element['on' + type] = handler;
+        }
+    },
+    /**
+     * 移除事件处理程序
+     * @param {Element} element - 要操作的元素
+     * @param {String} type - 事件名称
+     * @param {Function} handler - 事件处理程序函数
+     */
+    removeHandler: function (element, type, handler) {
+        if (element.removeEventListener) {//DOM2级事件处理程序
+            element.removeEventListener(type, handler, false);
+        } else if (element.detachEvent) {//IE事件处理程序
+            element.detachEvent('on' + type, handler);
+        } else {//DOM0级事件处理程序
+            element['on' + type] = null;
+        }
+    },
+    /**
+     * 获取事件对象
+     * @param event
+     * @return {Event}
+     */
+    getEvent: function (event) {
+        return event ? event : window.event;
+    },
+    /**
+     * 获取事件目标
+     * @param {Event} event
+     * @return {string|EventTarget|Node|*|Object}
+     */
+    getTarget: function (event) {
+        return event.target || event.srcElement;
+    },
+    /**
+     * 取消事件默认行为
+     * @param {Event} event
+     */
+    preventDefault: function (event) {
+        if (event.preventDefault) {
+            event.preventDefault();
+        } else {
+            event.returnValue = false;
+        }
+    },
+    /**
+     * 阻止事件冒泡
+     * @param {Event} event
+     */
+    stopPropagation: function (event) {
+        if (event.stopPropagation) {
+            event.stopPropagation();
+        } else {
+            event.cancelBubble = true;
+        }
+    }
+}; 
+```
