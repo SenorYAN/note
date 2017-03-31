@@ -216,14 +216,6 @@ a.myName(); //"a"
 a.myLabel(); //"obj a"
 ```
 
-▼	Bar
-     	name : “a”
-	label:  “obj a”
-▼	__proto__: Foo
-	►	myLabel : function()
-	▼	__proto__: Object
-		► constructor : Foo(name)
-		► myName : function()
-		▼ __proto__  : Object
-			► constructor : Object()
+![](3main/C317B68E-2379-451B-AF82-F97B87AF1D88.png)
+
 			
