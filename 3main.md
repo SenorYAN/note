@@ -188,3 +188,42 @@ var person1 = new Person();
 var person2 = new Person();
 ```
 ![](3main/9B200965-F16E-4F29-B2F3-961CDD73B39A.png)
+
+* 原型继承
+```javascript
+function Foo(name) {
+	this.name = name;
+}
+
+Foo.prototype.myName = function() {
+	return this.name;
+}
+
+function Bar(name, label) {
+	Foo.call(this, name);
+	this.label = label;
+}
+
+Bar.prototype = Object.create( Foo.prototype );
+
+Bar.prototype.myLabel = function() {
+	return this.label;
+}
+
+var a = new Bar("a", "obj a");
+
+a.myName(); //"a"
+a.myLabel(); //"obj a"
+```
+
+▼	Bar
+     	name : “a”
+	label:  “obj a”
+▼	__proto__: Foo
+	►	myLabel : function()
+	▼	__proto__: Object
+		► constructor : Foo(name)
+		► myName : function()
+		▼ __proto__  : Object
+			► constructor : Object()
+			
