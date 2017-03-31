@@ -1,4 +1,4 @@
-# 3大重点
+# 3main
 布局、闭包、跨域
 ## 布局
 ### 圣杯布局
@@ -157,3 +157,34 @@ oo.bb.ff(); //2  只和最靠近的引用的有关
 eval中的this：看谁在调用 eval() 方法，调用者的执行环境中的 this 就被 eval() 方法继承下来了
 
 call() 和 apply() 是函数对象的方法，它的作用是改变函数的调用对象，它的第一个参数就表示改变后的调用这个函数的对象。因此，this 指代的就是这两个方法的第一个参数。call() 和 apply() 的参数为空时，默认调用全局对象。
+
+## 原型
+* 每个对象都有个__proto__属性指创建他的构造函数的prototype
+* 普通对象：
+```javascript
+var o1 = {};
+var o2 = new Object();
+```
+函数对象：
+```javascript
+function f1(){};
+var f2 = function(){};
+var f3 = new Function('str','console.log(str)');
+```
+凡是使用 function 关键字或 Function 构造函数创建的对象都是函数对象。而且，只有函数对象才拥有 prototype （原型）属性。
+* 原型：
+我们创建的每个函数都有一个 prototype（原型）属性。使用原型的好处是可以让所有对象实例共享它所包含的属性和方法。
+```javascript
+function Person(){}
+
+Person.prototype.name = "Stone";
+Person.prototype.age = 28;
+Person.prototype.job = "Software Engineer";
+Person.prototype.sayName = function(){
+    console.log(this.name);
+};
+
+var person1 = new Person();
+var person2 = new Person();
+```
+![](3main/9B200965-F16E-4F29-B2F3-961CDD73B39A.png)
