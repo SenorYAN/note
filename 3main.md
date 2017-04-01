@@ -224,4 +224,6 @@ a.myLabel(); //"obj a"
 > 4、Bar.prototype 是 Foo的一个实例，拥有私有方法myLabel，它的_proto_指向它的创造函数的原型（Foo.prototype、是一个Object)  
 > 5、Foo.prototype是一个Object，拥有私有方法myName，它的_proto_执行它的创造函数的原型（Object.prototype、是一个Object）  
 
+用Object.assign扩展原型，将不会有__proto__的指向，用Object.create和new有效
+
 
