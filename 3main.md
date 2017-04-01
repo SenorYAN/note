@@ -189,7 +189,7 @@ var person2 = new Person();
 ```
 ![](3main/9B200965-F16E-4F29-B2F3-961CDD73B39A.png)
 
-* 原型继承
+* 原型继承，  原型链
 ```javascript
 function Foo(name) {
 	this.name = name;
@@ -218,4 +218,10 @@ a.myLabel(); //"obj a"
 
 ![](3main/C317B68E-2379-451B-AF82-F97B87AF1D88.png)
 
-			
+> 1、a是一个Bar的实例；  
+> 2、a有两个私有属性name、label；  
+> 3、a的_proto_指向它的创造函数的原型（Bar.prototype、是一个Foo）；  
+> 4、Bar.prototype 是 Foo的一个实例，拥有私有方法myLabel，它的_proto_指向它的创造函数的原型（Foo.prototype、是一个Object)  
+> 5、Foo.prototype是一个Object，拥有私有方法myName，它的_proto_执行它的创造函数的原型（Object.prototype、是一个Object）  
+
+
