@@ -61,6 +61,15 @@
             document.onkeydown = function(e){
                 setPosition(e.keyCode);
             }
+
+            let time = setInterval(function(){
+                let _top = parseInt(actObj.style.top, 10);
+                if(_top<340){
+                    setPosition(40);
+                }else{
+                    clearInterval(time);
+                }
+            },500)
         })();
     </script>
 </body>
