@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Qube</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    .container{
+        top: 100px; left: 100px; width: 200px; height: 360px; background: black; position: absolute;
+    }
+    .activityModel {
+        margin: 1px; width: 19px; height: 19px; background: red; position: absolute;
+    }
+</style>
+<body>
+    <div class="container">
+        <div class="activityModel"></div>
+    </div>
+
+    <script>
+        (function() {
+            let actObj = document.getElementsByClassName('activityModel')[0];
+            actObj.style.top = 0;
+            actObj.style.left = 0;
+
+            let setPosition = function(flag){
+                let _top = parseInt(actObj.style.top, 10);
+                let _left = parseInt(actObj.style.left, 10);
+                switch(flag){
+                    case 37 :
+                        if(_left>0){
+                            actObj.style.left = _left - 20 + 'px';
+                        }
+                        break;
+                    case 38:
+                        if(_top>0) {
+                            actObj.style.top = _top - 20 + 'px';
+                        }
+                        break;
+                    case 39:
+                        if(_left<180){
+                            actObj.style.left = _left + 20 + 'px';
+                        }
+                        break;
+                    case 40:
+                        if(_top<340){
+                            actObj.style.top = _top + 20 + 'px';
+                        }
+                        break;
+                    case 32:
+                        break;
+                    default:
+                        break;
+                }
+            };
+
+            document.onkeydown = function(e){
+                setPosition(e.keyCode);
+            }
+        })();
+    </script>
+</body>
+</html>
