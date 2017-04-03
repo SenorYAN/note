@@ -13,64 +13,108 @@
         top: 100px; left: 100px; width: 200px; height: 360px; background: black; position: absolute;
     }
     .activityModel {
-        margin: 1px; width: 19px; height: 19px; background: red; position: absolute;
+        margin: 1px; width: 19px; height: 19px; background: red; position: absolute; left: 100px;
     }
 </style>
 <body>
-    <div class="container">
-        <div class="activityModel"></div>
+    <div class="container" id="container">
     </div>
 
-    <script>
+    <script type="text/javascript">
+        let Qube={};
+
         (function() {
-            let actObj = document.getElementsByClassName('activityModel')[0];
-            actObj.style.top = 0;
-            actObj.style.left = 0;
-
-            let setPosition = function(flag){
-                let _top = parseInt(actObj.style.top, 10);
-                let _left = parseInt(actObj.style.left, 10);
-                switch(flag){
-                    case 37 :
-                        if(_left>0){
-                            actObj.style.left = _left - 20 + 'px';
-                        }
-                        break;
-                    case 38:
-                        if(_top>0) {
-                            actObj.style.top = _top - 20 + 'px';
-                        }
-                        break;
-                    case 39:
-                        if(_left<180){
-                            actObj.style.left = _left + 20 + 'px';
-                        }
-                        break;
-                    case 40:
-                        if(_top<340){
-                            actObj.style.top = _top + 20 + 'px';
-                        }
-                        break;
-                    case 32:
-                        break;
-                    default:
-                        break;
-                }
-            };
-
-            document.onkeydown = function(e){
-                setPosition(e.keyCode);
+            var qubeConstructor = function () {
+                this._init();
             }
+            Object.assign(qubeConstructor.prototype, {
+                state : {
+                    shape : [2,0,2,1,2,2,1,2],
+                    x : 0,
+                    y : 0,
+                    size : 20
+                },
+                setState(newState) {
+                    Object.assign(this.state, newState);
+                },
+                _init() {
+                    let self = this;
+                    for (let i = 0; i < 4; i++) {
+                        var div = document.createElement("div");
+                        div.className = "activityModel";
+                        document.getElementById('container').appendChild(div);
+                    }
 
-            let time = setInterval(function(){
-                let _top = parseInt(actObj.style.top, 10);
-                if(_top<340){
-                    setPosition(40);
-                }else{
-                    clearInterval(time);
+                    this._show();
+
+                    document.onkeydown = (e) => {
+                        switch(e.keyCode){
+                            case 37 :
+                                self._setPosition(-1,0);
+                                break;
+                            case 38:
+                                self._setPosition(0,-1);
+                                break;
+                            case 39:
+                                self._setPosition(1,0);
+                                break;
+                            case 40:
+                                self._setPosition(0,1);
+                                break;
+                            case 32:
+                                self._circlePosition();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+
+//                    let time = setInterval(function(){
+//                        self._setPosition(0,1)
+//                    },1000);
+
+                    return self;
+                },
+                _show() {
+                    let self =this;
+                    let divs = document.getElementsByClassName("activityModel");
+                    [...divs].forEach((e, i) => {
+                        e.style.top = (self.state.shape[i * 2 + 1] + self.state.y) * self.state.size + "px";
+                        e.style.left = (self.state.shape[i * 2] + self.state.x) * self.state.size + 60 +  "px";
+                    })
+                },
+                _setPosition(x,y) {
+                    if(!this._check(this.state.x + x, this.state.y + y, this.state.shape)) return ;
+                    this.state.x += x;
+                    this.state.y += y;
+                    this._show();
+                },
+                _circlePosition() {
+                    let shape = this.state.shape;
+                    this.setState({
+                        shape : [shape[1], 2 - shape[0], shape[3], 2 - shape[2], shape[5], 2 - shape[4], shape[7], 2 - shape[6]]
+                    })
+                    this._show();
+                },
+                _check(x, y, shape) {
+                    let minX = Math.min.apply(null, shape.filter((e, i) => i%2 === 0));
+                    let minY = Math.min.apply(null, shape.filter((e, i) => i%2 === 1));
+                    let maxX = Math.max.apply(null, shape.filter((e, i) => i%2 === 0));
+                    let maxY = Math.max.apply(null, shape.filter((e, i) => i%2 === 1));
+                    if ((maxX + x + 1) > 7 || (minX + x) < -3 ||
+                        (maxY + y + 1) > 18 || (minY + y) < 0){
+                        return false;
+                    }else{
+                        return true;
+                    }
+
                 }
-            },500)
+            })
+
+            Qube.qubeConstructor = qubeConstructor;
         })();
+
+        new Qube.qubeConstructor();
     </script>
 </body>
 </html>
