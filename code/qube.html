@@ -91,9 +91,11 @@
                 },
                 _circlePosition() {
                     let shape = this.state.shape;
+                    shape = [shape[1], 2 - shape[0], shape[3], 2 - shape[2], shape[5], 2 - shape[4], shape[7], 2 - shape[6]];
+                    if(!this._check(this.state.x, this.state.y, shape)) return ;
                     this.setState({
-                        shape : [shape[1], 2 - shape[0], shape[3], 2 - shape[2], shape[5], 2 - shape[4], shape[7], 2 - shape[6]]
-                    })
+                        shape
+                    });
                     this._show();
                 },
                 _check(x, y, shape) {
