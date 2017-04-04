@@ -12,8 +12,11 @@
     .container{
         top: 100px; left: 100px; width: 200px; height: 360px; background: black; position: absolute;
     }
-    .activityModel {
+    .activityModel, .stationaryModel {
         margin: 1px; width: 19px; height: 19px; background: red; position: absolute; left: 100px;
+    }
+    .stationaryModel{
+        background: #fff;
     }
 </style>
 <body>
@@ -29,7 +32,15 @@
             }
             Object.assign(qubeConstructor.prototype, {
                 state : {
-                    shape : [2,0,2,1,2,2,1,2],
+                    shapes : [
+                        [2,0,2,1,2,2,1,2],
+                        [1,0,1,1,1,2,2,2],
+                        [0,1,1,1,1,2,2,2],
+                        [0,2,1,1,1,2,2,1],
+                        [0,0,0,1,1,0,1,1],
+                        [0,2,1,1,1,2,2,2]
+                    ],
+                    shape : [],
                     x : 0,
                     y : 0,
                     size : 20
@@ -37,15 +48,13 @@
                 setState(newState) {
                     Object.assign(this.state, newState);
                 },
+                _randomShape() {
+                    return this.state.shapes[~~(Math.random() * this.state.shapes.length)]
+                },
                 _init() {
                     let self = this;
-                    for (let i = 0; i < 4; i++) {
-                        var div = document.createElement("div");
-                        div.className = "activityModel";
-                        document.getElementById('container').appendChild(div);
-                    }
 
-                    this._show();
+                    this._create()._show();
 
                     document.onkeydown = (e) => {
                         switch(e.keyCode){
@@ -69,11 +78,34 @@
                         }
                     }
 
-//                    let time = setInterval(function(){
-//                        self._setPosition(0,1)
-//                    },1000);
+                    let time = setInterval(function(){
+                        self._setPosition(0,1)
+                    },1000);
 
                     return self;
+                },
+                _create() {
+                    let newShape = this._randomShape();
+                    this.setState({
+                        shape : newShape
+                    });
+                    for (let i = 0; i < 4; i++) {
+                        let div = document.createElement("div");
+                        div.className = "activityModel";
+                        document.getElementById('container').appendChild(div);
+                    }
+                    return this;
+                },
+                _settle() {
+                    let divs = document.getElementsByClassName("activityModel");
+                    [...divs].forEach((e, i) => {
+                        e.className = "stationaryModel";
+                    })
+                    this.setState({
+                        x: 0,
+                        y: 0
+                    })
+                    return this;
                 },
                 _show() {
                     let self =this;
@@ -84,10 +116,16 @@
                     })
                 },
                 _setPosition(x,y) {
-                    if(!this._check(this.state.x + x, this.state.y + y, this.state.shape)) return ;
-                    this.state.x += x;
-                    this.state.y += y;
-                    this._show();
+                    if(this._check(this.state.x + x, this.state.y + y, this.state.shape)){
+                        this.setState({
+                            x: this.state.x + x,
+                            y: this.state.y + y
+                        })
+                        this._show();
+                    }else{
+                        if(y === 0){ return }
+                        this._settle()._create()._show();
+                    }
                 },
                 _circlePosition() {
                     let shape = this.state.shape;
