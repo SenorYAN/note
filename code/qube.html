@@ -13,14 +13,27 @@
         top: 100px; left: 100px; width: 200px; height: 360px; background: black; position: absolute;
     }
     .activityModel, .stationaryModel {
-        margin: 1px; width: 19px; height: 19px; background: red; position: absolute; left: 100px;
+        margin: 1px; width: 19px; height: 19px; position: absolute; left: 100px;
     }
-    .stationaryModel{
+    .board{
+        top: 100px; left: 300px; width: 100px; height: 360px; background: grey; position: absolute;
+    }
+    .board> div{
+        width: auto;
+        margin: 50px 20px;
+        height: 100px;
         background: #fff;
+        line-height: 100px;
+        font-size: 3em;
+        text-align: center;
     }
 </style>
 <body>
     <div class="container" id="container">
+    </div>
+    <div class="board" id="board">
+        <div id="nextShape"></div>
+        <div id="score"></div>
     </div>
 
     <script type="text/javascript">
@@ -35,15 +48,21 @@
                     shapes : [
                         [2,0,2,1,2,2,1,2],
                         [1,0,1,1,1,2,2,2],
-                        [0,1,1,1,1,2,2,2],
-                        [0,2,1,1,1,2,2,1],
+                        [0,0,1,0,1,1,2,1],
+                        [0,1,1,0,1,1,2,0],
                         [0,0,0,1,1,0,1,1],
-                        [0,2,1,1,1,2,2,2]
+                        [0,1,1,1,1,1,2,1]
                     ],
+                    bgColors: ['red', 'yellow', 'blue', 'pink', 'orange', 'green', 'purple'],
                     shape : [],
+                    bgColor : '',
+                    container :[],
+                    shapeDiv : [],
                     x : 0,
                     y : 0,
-                    size : 20
+                    size : 20,
+                    time : null,
+                    score : 0
                 },
                 setState(newState) {
                     Object.assign(this.state, newState);
@@ -53,6 +72,7 @@
                 },
                 _init() {
                     let self = this;
+                    document.getElementById('score').innerHTML = this.state.score;
 
                     this._create()._show();
 
@@ -62,7 +82,7 @@
                                 self._setPosition(-1,0);
                                 break;
                             case 38:
-                                self._setPosition(0,-1);
+                                //self._setPosition(0,-1);
                                 break;
                             case 39:
                                 self._setPosition(1,0);
@@ -76,35 +96,49 @@
                             default:
                                 break;
                         }
-                    }
-
-                    let time = setInterval(function(){
-                        self._setPosition(0,1)
-                    },1000);
-
+                    };
+                    this.setState({
+                        time : setInterval(function(){
+                            self._setPosition(0,1)
+                        },800)
+                    });
                     return self;
                 },
                 _create() {
                     let newShape = this._randomShape();
-                    this.setState({
-                        shape : newShape
-                    });
+                    let shapeD = [];
+                    let bgColor = this.state.bgColors[~~(Math.random()*this.state.bgColors.length)];
                     for (let i = 0; i < 4; i++) {
                         let div = document.createElement("div");
                         div.className = "activityModel";
+                        shapeD[i] = div;
                         document.getElementById('container').appendChild(div);
                     }
+                    this.setState({
+                        shape : newShape,
+                        shapeDiv : shapeD,
+                        bgColor
+                    });
                     return this;
                 },
                 _settle() {
+                    let self = this;
                     let divs = document.getElementsByClassName("activityModel");
+                    let container = this.state.container;
                     [...divs].forEach((e, i) => {
+                        let px = self.state.shape[2 * i + 1] + this.state.y;
+                        let py = self.state.shape[2 * i] + this.state.x;
+                        container[px + "_" + py] = self.state.shapeDiv[i];
                         e.className = "stationaryModel";
+                        e.style.background = '#fff';
                     })
                     this.setState({
                         x: 0,
-                        y: 0
-                    })
+                        y: 0,
+                        container
+                    });
+                    console.log(this.state);
+                    self._disappear();
                     return this;
                 },
                 _show() {
@@ -113,7 +147,46 @@
                     [...divs].forEach((e, i) => {
                         e.style.top = (self.state.shape[i * 2 + 1] + self.state.y) * self.state.size + "px";
                         e.style.left = (self.state.shape[i * 2] + self.state.x) * self.state.size + 60 +  "px";
+                        e.style.background = self.state.bgColor;
                     })
+                    if(!this._check(this.state.x, this.state.y, this.state.shape)){
+                        clearInterval(this.state.time);
+                        alert('game over!');
+                    }
+                },
+                _disappear() {
+                    let s = 0;
+                    for (let m = 0; m < 18; m++) {
+                        let count = 0;
+                        for (let n = -3; n < 7; n++) {
+                            if (this.state.container[m + "_" + n])
+                                count++;
+                        }
+                        if (count === 10) {
+                            s++;
+                            this._removeLine(m);
+                        }
+                    }
+                },
+                _removeLine(r) {
+                    let container = this.state.container;
+                    for (let n = -3; n < 7; n++){
+                        document.getElementById('container').removeChild(container[r + "_" + n]);
+                        this.setState({
+                            score : this.state.score + 1
+                        })
+                        document.getElementById('score').innerHTML = this.state.score/10;
+                    }
+
+                    // 把所消除行上面所有的方块下移一行
+                    for (let i = r; i > 0; i--) {
+                        for (let j = -3; j < 7; j++) {
+                            container[i + "_" + j] = container[(i - 1) + "_" + j]
+                            if (container[i + "_" + j])
+                                container[i + "_" + j].style.top = i * this.state.size + "px";
+                        }
+                    }
+                    console.log(this.score)
                 },
                 _setPosition(x,y) {
                     if(this._check(this.state.x + x, this.state.y + y, this.state.shape)){
@@ -141,15 +214,25 @@
                     let minY = Math.min.apply(null, shape.filter((e, i) => i%2 === 1));
                     let maxX = Math.max.apply(null, shape.filter((e, i) => i%2 === 0));
                     let maxY = Math.max.apply(null, shape.filter((e, i) => i%2 === 1));
+                    let overlap = false;
+
+                    for(let i = 0; i < shape.length; i++){
+                        let px = shape[2 * i + 1] + y;
+                        let py = shape[2 * i] + x;
+                        if (this.state.container[px + "_" + py]) {
+                            overlap = true;
+                        }
+                    }
+
                     if ((maxX + x + 1) > 7 || (minX + x) < -3 ||
-                        (maxY + y + 1) > 18 || (minY + y) < 0){
+                        (maxY + y + 1) > 18 || (minY + y) < 0 || overlap){
                         return false;
                     }else{
                         return true;
                     }
 
                 }
-            })
+            });
 
             Qube.qubeConstructor = qubeConstructor;
         })();
