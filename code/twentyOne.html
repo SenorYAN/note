@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>21点</title>
+    <style>
+        body{
+            background: #45a176;
+        }
+        .poker{
+            width: 7em;
+            height: 10em;
+            background: #fff;
+            position: relative;
+            -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+            box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+            cursor: default;
+            border-radius: 3px;
+        }
+        .face{
+            width: 100%;
+            height: 100%;
+            background: url('./pkp/css/faces/0_13.svg');
+            background-size: 100% 100% ;
+        }
+        .topLeft, .bottomRight{
+            position: absolute;
+            font-size: 1em;
+            text-align: center;
+            line-height: 1;
+            font-family: 'Ubuntu Condensed',sans-serif;
+            white-space: pre;
+        }
+        .topLeft{
+            top: .5em;
+            left: .2em;
+            -webkit-transform: translate(-50%,0);
+            -moz-transform: translate(-50%,0);
+            -o-transform: translate(-50%,0);
+            -ms-transform: translate(-50%,0);
+            transform: translate(-50%,0);
+        }
+        .bottomRight{
+            bottom: .5rem;
+            right: .2rem;
+            -webkit-transform: rotate(180deg) translate(-50%,0);
+            -moz-transform: rotate(180deg) translate(-50%,0);
+            -o-transform: rotate(180deg) translate(-50%,0);
+            -ms-transform: rotate(180deg) translate(-50%,0);
+            transform: rotate(180deg) translate(-50%,0);
+        }
+    </style>
+</head>
+<body>
+    <div class="poker">
+        <div class="face" id="face"></div>
+        <div class="topLeft" id="topLeft">K</div>
+        <div class="bottomRight" id="bottomRight">K</div>
+    </div>
+
+    <div style="width:100px; height:50px; cursor: pointer" onclick="location.reload()">重选</div>
+    <script>
+        var TwentyOne = {};
+
+        (function(){
+            var pkp = function(){
+                this._init();
+            }
+            Object.assign(pkp.prototype, {
+                _init() {
+                    this.selectPoker();
+                },
+                selectPoker() {
+                    let huase = ~~(Math.random()*4);
+                    let shuzi = (~~(Math.random()*13)) + 1;
+                    let yanse = huase % 2 === 0 ? 'black' : '#bb0c0c';
+                    let card  = (function (n) {
+                        let res = 0;
+                        switch(n){
+                            case 1:
+                                res = 'A';
+                                break;
+                            case 11:
+                                res = 'J';
+                                break;
+                            case 12:
+                                res = 'Q';
+                                break;
+                            case 13:
+                                res = 'K';
+                                break;
+                            default:
+                                res = n + ''
+                                break;
+                        }
+                        return res;
+                    })(shuzi);
+                    console.log(huase, shuzi, yanse, card)
+                    let _fa = document.getElementById('face');
+                    let _tl = document.getElementById('topLeft');
+                    let _br = document.getElementById('bottomRight');
+
+                    _fa.style.background = `url('./pkp/css/faces/${huase}_${shuzi}.svg')`;
+                    _fa.style.backgroundSize = '100% 100%';
+                    _tl.style.color = yanse;
+                    _tl.innerHTML = card;
+                    _br.style.color = yanse;
+                    _br.innerHTML = card;
+                    if(shuzi === 10 ){
+                       _tl.style.left = '.6em';
+                       _br.style.right = '.6em';
+                       _tl.style.letterSpacing = 0;
+                       _br.style.letterSpacing = 0;
+                    }else{
+                        _tl.style.letterSpacing = '-1em';
+                        _br.style.letterSpacing = '-1em';
+                    }
+                }
+            })
+            TwentyOne.pkp = pkp;
+        })();
+
+        new TwentyOne.pkp();
+    </script>
+</body>
+</html>
