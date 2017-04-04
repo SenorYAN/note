@@ -23,9 +23,20 @@
         margin: 50px 20px;
         height: 100px;
         background: #fff;
-        line-height: 100px;
         font-size: 3em;
         text-align: center;
+        position: relative;
+    }
+    #nextShape:before{
+        content:'Next:';
+        font-size: 16px;
+        height:20px;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .nextModel{
+        margin: 1px; width: 19px; height: 19px; position: absolute;;
     }
 </style>
 <body>
@@ -51,10 +62,11 @@
                         [0,0,1,0,1,1,2,1],
                         [0,1,1,0,1,1,2,0],
                         [0,0,0,1,1,0,1,1],
-                        [0,1,1,1,1,1,2,1]
+                        [0,1,1,0,1,1,2,1]
                     ],
                     bgColors: ['red', 'yellow', 'blue', 'pink', 'orange', 'green', 'purple'],
                     shape : [],
+                    nextShape : [],
                     bgColor : '',
                     container :[],
                     shapeDiv : [],
@@ -73,6 +85,9 @@
                 _init() {
                     let self = this;
                     document.getElementById('score').innerHTML = this.state.score;
+                    this.setState({
+                        nextShape : self._randomShape()
+                    })
 
                     this._create()._show();
 
@@ -105,18 +120,23 @@
                     return self;
                 },
                 _create() {
-                    let newShape = this._randomShape();
+                    let self = this;
                     let shapeD = [];
                     let bgColor = this.state.bgColors[~~(Math.random()*this.state.bgColors.length)];
+                    document.getElementById('nextShape').innerHTML = '';
                     for (let i = 0; i < 4; i++) {
                         let div = document.createElement("div");
+                        let nDiv = document.createElement("div");
                         div.className = "activityModel";
+                        nDiv.className = "nextModel";
                         shapeD[i] = div;
                         document.getElementById('container').appendChild(div);
+                        document.getElementById('nextShape').appendChild(nDiv);
                     }
                     this.setState({
-                        shape : newShape,
+                        shape : self.state.nextShape,
                         shapeDiv : shapeD,
+                        nextShape : self._randomShape(),
                         bgColor
                     });
                     return this;
@@ -137,7 +157,6 @@
                         y: 0,
                         container
                     });
-                    console.log(this.state);
                     self._disappear();
                     return this;
                 },
@@ -149,9 +168,18 @@
                         e.style.left = (self.state.shape[i * 2] + self.state.x) * self.state.size + 60 +  "px";
                         e.style.background = self.state.bgColor;
                     })
+
+                    let nDivs = document.getElementsByClassName("nextModel");
+                    [...nDivs].forEach((e, i) => {
+                        e.style.top = (self.state.nextShape[i * 2 + 1]) * self.state.size + 40 + "px";
+                        e.style.left = (self.state.nextShape[i * 2]) * self.state.size   +  "px";
+                        e.style.background = '#000';
+                    })
+
                     if(!this._check(this.state.x, this.state.y, this.state.shape)){
                         clearInterval(this.state.time);
-                        alert('game over!');
+                        let c = confirm("重新开始？");
+                        if(c) location.reload();
                     }
                 },
                 _disappear() {
@@ -186,7 +214,6 @@
                                 container[i + "_" + j].style.top = i * this.state.size + "px";
                         }
                     }
-                    console.log(this.score)
                 },
                 _setPosition(x,y) {
                     if(this._check(this.state.x + x, this.state.y + y, this.state.shape)){
