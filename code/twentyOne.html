@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>21点</title>
+    <link rel="stylesheet" href="./animate.css">
     <style>
         body{
             background: #45a176;
             display: flex;
             flex-wrap: wrap;
+            color: #fff;
         }
         .poker{
             width: 7em;
@@ -19,6 +21,7 @@
             cursor: default;
             border-radius: 3px;
             margin: 10px;
+            animation: fadeInRightBig 0.5s;
         }
         .face{
             width: 100%;
@@ -55,7 +58,18 @@
     </style>
 </head>
 <body>
-    <div style="width:100px; height:50px; cursor: pointer" onclick="location.reload()">重选</div>
+    <div>
+        <!--<div style="width:100px; height:50px; cursor: pointer" onclick="location.reload()">重开</div>-->
+        <div style="width:100px; height:50px; cursor: pointer" id="addPoker">要牌</div>
+        <div id="board" class="board">
+            <div id="score" class="score"><h4>Point：</h4><span id="point">？？？</span></div>
+        </div>
+        <div id="lose" style="width:200px; height:0; cursor: pointer; margin-top: 30px; overflow: hidden;" onclick="location.reload()">
+            <span>你爆啦！哈哈哈哈哈！点击立即重开！</span></div>
+        <div id="win" style="width:200px; height:0; cursor: pointer; margin-top: 30px; overflow: hidden;" onclick="location.reload()">
+            <span>你赢了！点击立即再来一局！</span></div>
+    </div>
+
     <script>
         var TwentyOne = {};
 
@@ -68,39 +82,67 @@
                     pokers : Array.from({length:52}).map((e,i) => i),
                     selectedPokers : []
                 },
+                setState(newState) {
+                    Object.assign(this.state, newState);
+                },
                 _init() {
-                    this.createPoker().showPoker();
+                    this.choosePoker(2);
+                    for(let i=0; i<this.state.selectedPokers.length; i++) {
+                        this.createPoker();
+                    }
+                    this.showPoker();
+                    document.getElementById('addPoker').addEventListener('click',this.addPoker.bind(this));
+                },
+                choosePoker(i) {
+                    let selectPoks = this.state.selectedPokers.slice();
+                    while(i>0){
+                        let num = ~~(Math.random()*this.state.pokers.length);
+                        let pok = this.state.pokers.splice(num, 1);
+                        selectPoks.push(pok[0]);
+                        i--;
+                    }
+                    this.setState({
+                        selectedPokers : selectPoks
+                        //selectedPokers : selectPoks.sort((a,b) => a%13-b%13)
+                    });
+                    console.log(this.state.selectedPokers)
                 },
                 createPoker() {
-                    for(let i=0; i<5; i++){
-                        let pok = document.createElement('div');
-                        pok.className = 'poker';
-                        pok.id = 'poker';
-                        document.body.appendChild(pok);
-                        let _fa = document.createElement('div');
-                        _fa.id = 'face';
-                        let _tl = document.createElement('div');
-                        _tl.id = 'topLeft';
-                        let _br = document.createElement('div');
-                        _br.id = 'bottomRight';
-                        _fa.className = 'face';
-                        _tl.className = 'topLeft';
-                        _br.className = 'bottomRight';
-                        pok.appendChild(_fa);
-                        pok.appendChild(_tl);
-                        pok.appendChild(_br);
-                    }
+                    let pok = document.createElement('div');
+                    pok.className = 'poker';
+                    pok.id = 'poker';
+                    document.body.appendChild(pok);
+                    let _fa = document.createElement('div');
+                    _fa.id = 'face';
+                    let _tl = document.createElement('div');
+                    _tl.id = 'topLeft';
+                    let _br = document.createElement('div');
+                    _br.id = 'bottomRight';
+                    _fa.className = 'face';
+                    _tl.className = 'topLeft';
+                    _br.className = 'bottomRight';
+                    pok.appendChild(_fa);
+                    pok.appendChild(_tl);
+                    pok.appendChild(_br);
                     return this;
+                },
+                addPoker() {
+                    if(this.state.selectedPokers.length > 4 || this.calculatePokers()>21 ) {
+                        alert('不能再要啦！')
+                        return;
+                    }
+                    this.createPoker();
+                    this.choosePoker(1);
+                    this.showPoker();
                 },
                 showPoker() {
                     let fas = document.getElementsByClassName('face');
                     let tls = document.getElementsByClassName('topLeft');
                     let brs = document.getElementsByClassName('bottomRight');
 
-
-                    [...fas].forEach((e, i) => {
-                        let huase = ~~(Math.random()*4);
-                        let shuzi = (~~(Math.random()*13)) + 1;
+                    this.state.selectedPokers.forEach((e, i) => {
+                        let huase = ~~(e / 13)
+                        let shuzi = (e % 13) + 1;
                         let yanse = huase % 2 === 0 ? 'black' : '#bb0c0c';
                         let card  = (function (n) {
                             let res = 0;
@@ -124,10 +166,10 @@
                             return res;
                         })(shuzi);
 
-                        console.log(huase, shuzi, yanse, card);
+                        //console.log(huase, shuzi, yanse, card);
 
-                        e.style.background = `url('./pkp/css/faces/${huase}_${shuzi}.svg')`;
-                        e.style.backgroundSize = '100% 100%';
+                        fas[i].style.background = `url('./pkp/css/faces/${huase}_${shuzi}.svg')`;
+                        fas[i].style.backgroundSize = '100% 100%';
                         tls[i].style.color = yanse;
                         tls[i].innerHTML = card;
                         brs[i].style.color = yanse;
@@ -142,8 +184,23 @@
                             brs[i].style.letterSpacing = '-1em';
                         }
                     });
+
+                    if(this.calculatePokers()>21){
+                        document.getElementById('lose').style.height = '50px';
+                    }
+
+                    if(this.calculatePokers()===21){
+                        document.getElementById('win').style.height = '50px';
+                    }
+                },
+                calculatePokers() {
+                    let points = this.state.selectedPokers.map((n) => ((n%13)>9?9:n%13)+1);
+                    console.log(points)
+                    let score = points.reduce((a,b) => a+b);
+                    document.getElementById('point').innerHTML = score;
+                    return score;
                 }
-            })
+            });
             TwentyOne.pkp = pkp;
         })();
 
