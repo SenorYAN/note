@@ -33,7 +33,7 @@
         }
         .topLeft{
             top: .5em;
-            left: .2em;
+            left: .225em;
             -webkit-transform: translate(-50%,0);
             -moz-transform: translate(-50%,0);
             -o-transform: translate(-50%,0);
@@ -42,7 +42,7 @@
         }
         .bottomRight{
             bottom: .5rem;
-            right: .2rem;
+            right: .225rem;
             -webkit-transform: rotate(180deg) translate(-50%,0);
             -moz-transform: rotate(180deg) translate(-50%,0);
             -o-transform: rotate(180deg) translate(-50%,0);
@@ -52,12 +52,6 @@
     </style>
 </head>
 <body>
-    <div class="poker">
-        <div class="face" id="face"></div>
-        <div class="topLeft" id="topLeft">K</div>
-        <div class="bottomRight" id="bottomRight">K</div>
-    </div>
-
     <div style="width:100px; height:50px; cursor: pointer" onclick="location.reload()">重选</div>
     <script>
         var TwentyOne = {};
@@ -68,7 +62,26 @@
             }
             Object.assign(pkp.prototype, {
                 _init() {
-                    this.selectPoker();
+                    this._createPoker().selectPoker();
+                },
+                _createPoker() {
+                    let pok = document.createElement('div');
+                    pok.className = 'poker';
+                    pok.id = 'poker';
+                    document.body.appendChild(pok);
+                    let _fa = document.createElement('div');
+                    _fa.id = 'face';
+                    let _tl = document.createElement('div');
+                    _tl.id = 'topLeft';
+                    let _br = document.createElement('div');
+                    _br.id = 'bottomRight';
+                    _fa.className = 'face';
+                    _tl.className = 'topLeft';
+                    _br.className = 'bottomRight';
+                    document.getElementById('poker').appendChild(_fa);
+                    document.getElementById('poker').appendChild(_tl);
+                    document.getElementById('poker').appendChild(_br);
+                    return this;
                 },
                 selectPoker() {
                     let huase = ~~(Math.random()*4);
@@ -90,7 +103,7 @@
                                 res = 'K';
                                 break;
                             default:
-                                res = n + ''
+                                res = n + '';
                                 break;
                         }
                         return res;
