@@ -6,6 +6,8 @@
     <style>
         body{
             background: #45a176;
+            display: flex;
+            flex-wrap: wrap;
         }
         .poker{
             width: 7em;
@@ -16,6 +18,7 @@
             box-shadow: 0 1px 1px rgba(0,0,0,0.15);
             cursor: default;
             border-radius: 3px;
+            margin: 10px;
         }
         .face{
             width: 100%;
@@ -61,73 +64,84 @@
                 this._init();
             }
             Object.assign(pkp.prototype, {
-                _init() {
-                    this._createPoker().selectPoker();
+                state: {
+                    pokers : Array.from({length:52}).map((e,i) => i),
+                    selectedPokers : []
                 },
-                _createPoker() {
-                    let pok = document.createElement('div');
-                    pok.className = 'poker';
-                    pok.id = 'poker';
-                    document.body.appendChild(pok);
-                    let _fa = document.createElement('div');
-                    _fa.id = 'face';
-                    let _tl = document.createElement('div');
-                    _tl.id = 'topLeft';
-                    let _br = document.createElement('div');
-                    _br.id = 'bottomRight';
-                    _fa.className = 'face';
-                    _tl.className = 'topLeft';
-                    _br.className = 'bottomRight';
-                    document.getElementById('poker').appendChild(_fa);
-                    document.getElementById('poker').appendChild(_tl);
-                    document.getElementById('poker').appendChild(_br);
+                _init() {
+                    this.createPoker().showPoker();
+                },
+                createPoker() {
+                    for(let i=0; i<5; i++){
+                        let pok = document.createElement('div');
+                        pok.className = 'poker';
+                        pok.id = 'poker';
+                        document.body.appendChild(pok);
+                        let _fa = document.createElement('div');
+                        _fa.id = 'face';
+                        let _tl = document.createElement('div');
+                        _tl.id = 'topLeft';
+                        let _br = document.createElement('div');
+                        _br.id = 'bottomRight';
+                        _fa.className = 'face';
+                        _tl.className = 'topLeft';
+                        _br.className = 'bottomRight';
+                        pok.appendChild(_fa);
+                        pok.appendChild(_tl);
+                        pok.appendChild(_br);
+                    }
                     return this;
                 },
-                selectPoker() {
-                    let huase = ~~(Math.random()*4);
-                    let shuzi = (~~(Math.random()*13)) + 1;
-                    let yanse = huase % 2 === 0 ? 'black' : '#bb0c0c';
-                    let card  = (function (n) {
-                        let res = 0;
-                        switch(n){
-                            case 1:
-                                res = 'A';
-                                break;
-                            case 11:
-                                res = 'J';
-                                break;
-                            case 12:
-                                res = 'Q';
-                                break;
-                            case 13:
-                                res = 'K';
-                                break;
-                            default:
-                                res = n + '';
-                                break;
-                        }
-                        return res;
-                    })(shuzi);
-                    console.log(huase, shuzi, yanse, card)
-                    let _fa = document.getElementById('face');
-                    let _tl = document.getElementById('topLeft');
-                    let _br = document.getElementById('bottomRight');
+                showPoker() {
+                    let fas = document.getElementsByClassName('face');
+                    let tls = document.getElementsByClassName('topLeft');
+                    let brs = document.getElementsByClassName('bottomRight');
 
-                    _fa.style.background = `url('./pkp/css/faces/${huase}_${shuzi}.svg')`;
-                    _fa.style.backgroundSize = '100% 100%';
-                    _tl.style.color = yanse;
-                    _tl.innerHTML = card;
-                    _br.style.color = yanse;
-                    _br.innerHTML = card;
-                    if(shuzi === 10 ){
-                       _tl.style.left = '.6em';
-                       _br.style.right = '.6em';
-                       _tl.style.letterSpacing = 0;
-                       _br.style.letterSpacing = 0;
-                    }else{
-                        _tl.style.letterSpacing = '-1em';
-                        _br.style.letterSpacing = '-1em';
-                    }
+
+                    [...fas].forEach((e, i) => {
+                        let huase = ~~(Math.random()*4);
+                        let shuzi = (~~(Math.random()*13)) + 1;
+                        let yanse = huase % 2 === 0 ? 'black' : '#bb0c0c';
+                        let card  = (function (n) {
+                            let res = 0;
+                            switch(n){
+                                case 1:
+                                    res = 'A';
+                                    break;
+                                case 11:
+                                    res = 'J';
+                                    break;
+                                case 12:
+                                    res = 'Q';
+                                    break;
+                                case 13:
+                                    res = 'K';
+                                    break;
+                                default:
+                                    res = n + '';
+                                    break;
+                            }
+                            return res;
+                        })(shuzi);
+
+                        console.log(huase, shuzi, yanse, card);
+
+                        e.style.background = `url('./pkp/css/faces/${huase}_${shuzi}.svg')`;
+                        e.style.backgroundSize = '100% 100%';
+                        tls[i].style.color = yanse;
+                        tls[i].innerHTML = card;
+                        brs[i].style.color = yanse;
+                        brs[i].innerHTML = card;
+                        if(shuzi === 10 ){
+                            tls[i].style.left = '.6em';
+                            brs[i].style.right = '.6em';
+                            tls[i].style.letterSpacing = 0;
+                            brs[i].style.letterSpacing = 0;
+                        }else{
+                            tls[i].style.letterSpacing = '-1em';
+                            brs[i].style.letterSpacing = '-1em';
+                        }
+                    });
                 }
             })
             TwentyOne.pkp = pkp;
