@@ -62,7 +62,7 @@
         <!--<div style="width:100px; height:50px; cursor: pointer" onclick="location.reload()">重开</div>-->
         <div style="width:100px; height:50px; cursor: pointer" id="addPoker">要牌</div>
         <div id="board" class="board">
-            <div id="score" class="score"><h4>Point：</h4><span id="point">？？？</span></div>
+            <div id="score" class="score"><h4>Point：</h4><h6>五张之和不超过21也算胜利</h6><span id="point">？？？</span></div>
         </div>
         <div id="lose" style="width:200px; height:0; cursor: pointer; margin-top: 30px; overflow: hidden;" onclick="location.reload()">
             <span>你爆啦！哈哈哈哈哈！点击立即重开！</span></div>
@@ -185,20 +185,33 @@
                         }
                     });
 
-                    if(this.calculatePokers()>21){
-                        document.getElementById('lose').style.height = '50px';
-                    }
+                    let score = this.calculatePokers();
 
-                    if(this.calculatePokers()===21){
-                        document.getElementById('win').style.height = '50px';
+                    if(score > 21){
+                        document.getElementById('lose').style.height = '50px';
+                    }else{
+                        if(this.state.selectedPokers.length === 5){
+                            document.getElementById('win').style.height = '50px';
+                        }else{
+                            if(score === 21){
+                                document.getElementById('win').style.height = '50px';
+                            }
+                        }
                     }
                 },
                 calculatePokers() {
                     let points = this.state.selectedPokers.map((n) => ((n%13)>9?9:n%13)+1);
-                    console.log(points)
-                    let score = points.reduce((a,b) => a+b);
-                    document.getElementById('point').innerHTML = score;
-                    return score;
+                    console.log(points);
+                    let score = points.reduce((a,b) => a+b );
+                    let fakeScore = [score];
+                    console.log(fakeScore);
+                    points.filter((e) => e===1).forEach((e,i) => {
+                        fakeScore.push(score+10*(i+1))
+                    });
+                    let d = fakeScore.filter((e) => e<=21 ).sort((a,b) => Math.abs(a-21) - Math.abs(b-21));
+                    console.log(d);
+                    document.getElementById('point').innerHTML = d[0]||score;
+                    return d[0]||score;
                 }
             });
             TwentyOne.pkp = pkp;
