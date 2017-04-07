@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>21点</title>
     <link rel="stylesheet" href="./animate.css">
     <style>
@@ -32,6 +33,9 @@
             border-radius: 3px;
             margin: 10px;
             animation: fadeInRightBig 0.5s;
+        }
+        #zhuangPokers .poker.discover{
+            display: none;
         }
         .face{
             width: 100%;
@@ -91,22 +95,26 @@
         var TwentyOne = {};
 
         (function(){
-            var pkp = function(){
-                this._init();
-            }
-            Object.assign(pkp.prototype, {
-                state: {
-                    pokers : Array.from({length:52}).map((e,i) => i),
-                    selectedPokers : [],
-                    zhuangSelectedPokers : [],
-                    score : 0
-                },
+//            let pkp = function(){
+//                this._init();
+//            }
+            class pkp {
+                constructor() {
+                    this.state = {
+                        pokers : Array.from({length:52}).map((e,i) => i),
+                        selectedPokers : [],
+                        zhuangSelectedPokers : [],
+                        score : 0,
+                        zhuangScore: 0
+                    }
+                    this._init();
+                }
                 setState(newState) {
                     Object.assign(this.state, newState);
-                },
+                }
                 _init() {
                     this.choosePoker(2, 0);
-                    this.choosePoker(1, 1);
+                    this.choosePoker(2, 1);
                     for(let i=0; i<this.state.selectedPokers.length; i++) {
                         this.createPoker(0);
                     }
@@ -114,9 +122,13 @@
                         this.createPoker(1);
                     }
                     this.showPoker();
+                    let cover = document.getElementById('zhuangPokers');
+                    cover.children[1].className = 'poker discover';
                     document.getElementById('addPoker').addEventListener('click',this.addPoker.bind(this));
-                },
+                    document.getElementById('zhuangAddPoker').addEventListener('click',this.zhuangAddPoker.bind(this));
+                }
                 choosePoker(i,f) {
+                    console.log(this)
                     let selectPoks = this.state.selectedPokers.slice();
                     let zhuangSelectPoks = this.state.zhuangSelectedPokers.slice();
                     while(i>0){
@@ -135,7 +147,7 @@
                         //selectedPokers : selectPoks.sort((a,b) => a%13-b%13)
                     });
                     console.log(this.state.selectedPokers, this.state.zhuangSelectedPokers)
-                },
+                }
                 createPoker(i) {
                     let pok = document.createElement('div');
                     pok.className = 'poker';
@@ -155,21 +167,74 @@
                     pok.appendChild(_tl);
                     pok.appendChild(_br);
                     return this;
-                },
+                }
                 addPoker() {
-                    if(this.state.selectedPokers.length > 4 || this.calculatePokers(this.state.selectedPokers)>21 ) {
+                    if(this.state.selectedPokers.length > 4 || this.state.score>21 ) {
                         alert('不能再要啦！');
                         return;
                     }
                     this.createPoker(0);
                     this.choosePoker(1,0);
                     this.showPoker();
-                },
+                    if(this.state.score > 21 ) {
+                        let cover = document.getElementById('zhuangPokers');
+                        cover.children[0].className = 'poker discover';
+                        cover.children[1].className = 'poker';
+                        document.getElementById('point2').innerHTML = this.state.zhuangScore;
+                        setTimeout(function() {
+                            let c = confirm('你爆了，庄家赢了！');
+                            if (c) location.reload();
+                        },500);
+                        return;
+                    }
+                }
                 zhuangAddPoker() {
-                    this.createPoker(1);
-                    this.choosePoker(1,1);
-                    this.showPoker();
-                },
+                    let self = this;
+                    let cover = document.getElementById('zhuangPokers');
+                    cover.children[0].className = 'poker discover';
+                    cover.children[1].className = 'poker';
+                    document.getElementById('point2').innerHTML = this.state.zhuangScore;
+
+                    let foo = () => {
+                        self.createPoker(1);
+                        self.choosePoker(1, 1);
+                        self.showPoker();
+                        document.getElementById('point2').innerHTML = self.state.zhuangScore;
+
+                        if(self.state.zhuangScore > 21){
+                            setTimeout(function() {
+                                let c = confirm('庄家爆了，你赢了！!');
+                                if (c) location.reload();
+                            },750)
+                        }else if(self.state.zhuangSelectedPokers.length === 5){
+                            setTimeout(function() {
+                                let c = confirm('庄家5张了，你输了！!!');
+                                if(c) location.reload();
+                            },750)
+                        }else if(self.state.zhuangScore >= self.state.score){
+                            setTimeout(function() {
+                                let c = confirm('庄家比你大，你输了！!!!');
+                                if(c) location.reload();
+                            },750)
+                        }else{
+                            setTimeout(function(){
+                                foo();
+                            },750)
+                        }
+                    };
+
+
+                    setTimeout(function() {
+                        if(self.state.zhuangScore >= self.state.score){
+                            setTimeout(function() {
+                                let c = confirm('庄家不比你小，你输了！');
+                                if (c) location.reload();
+                            },500)
+                        }else{
+                            foo();
+                        }
+                    },200)
+                }
                 showPoker() {
                     let setPokers = (e,i,f) => {
                         let container = document.getElementById(f);
@@ -228,24 +293,12 @@
                     });
 
                     this.setState({
-                        score : this.calculatePokers(this.state.selectedPokers)
+                        score : this.calculatePokers(this.state.selectedPokers),
+                        zhuangScore : this.calculatePokers(this.state.zhuangSelectedPokers)
                     });
 
                     document.getElementById('point').innerHTML = this.state.score;
-
-
-                    /*if(this.state.score > 21){
-                        document.getElementById('lose').style.height = '50px';
-                    }else{
-                        if(this.state.selectedPokers.length === 5){
-                            document.getElementById('win').style.height = '50px';
-                        }else{
-                            if(this.state.score === 21){
-                                document.getElementById('win').style.height = '50px';
-                            }
-                        }
-                    }*/
-                },
+                }
                 calculatePokers(sPs) {
                     let points = sPs.map((n) => ((n%13)>9?9:n%13)+1);
 
@@ -259,7 +312,8 @@
 
                     return d[0]||score;
                 }
-            });
+            }
+
             TwentyOne.pkp = pkp;
         })();
 
