@@ -67,29 +67,56 @@ Returns an array of a given object's own enumerable values.
 从传入的参数返回一个数组。
 
 ### 方法
-* array1.**concat**([item1[, item2[, . . . [, itemN]]]])
+* array1.**concat**([item1[, item2[, . . . [, itemN]]]]);
 组合两个或者两个以上的数组，不改变原本的数组
 * arrayObj.**entries**();
-返回一个迭代器，他返回数组的[key，value]  对
-* array1.**every**(callbackfn[, thisArg])
+返回一个**迭代器**，他返回数组的[key，value]  对
+* array1.**every**(callbackfn[, thisArg]);
 确定数组的所有成员是否满足指定测试。一旦遇到不符合条件的就停止。
+如果 callbackfn 函数为所有数组元素返回 true，则为 true；否则为 false。如果数组没有元素，则 every 方法将返回 true。
 * arrayObj.**fill**(value [ , start [ , end ] ]);
 使用指定值填充数组
-* array1.**filter**(callbackfn[, thisArg])
+* array1.**filter**(callbackfn[, thisArg]);
 返回数组中的满足回调函数中指定的条件的元素
 * arrayObj.**findIndex**(callbackfn [, thisArg]);
 返回满足回调函数中指定的测试条件的第一个数组元素的索引值。
 * array1.**forEach**(callbackfn[, thisArg])
-为数组中的每个元素执行指定操作。
+为数组中的每个元素执行指定操作。callback最多接受三个参数。
 * array1.**indexOf**(searchElement[, fromIndex])
 返回某个值在数组中的第一个匹配项的索引。注意fromIndex
-* arrayObj.**join**([separator]) 
+* arrayObj.**join**([separator]) ;
 添加由指定分隔符字符串分隔的数组的所有元素。
 * arrayObj.**keys**();
-返回一个迭代器，它能返回数组的索引值。
+返回一个**迭代器**，它能返回数组的索引值。
 * array1.**lastIndexOf**(searchElement[, fromIndex])
 返回指定的值在数组中的最后一个匹配项的索引。
-* array1.**map**(callbackfn[, thisArg])
+* array1.**map**(callbackfn[, thisArg]);
 对数组的每个元素调用定义的回调函数并返回包含结果的数组。
-* arrayObj.**pop**( )
+* arrayObj.**pop**( );
 从数组中移除最后一个元素并返回该元素。
+* arrayObj.**push**([item1 [item2 [. . . [itemN ]]]])
+将新元素追加到一个数组中，并返回新的数组长度。
+* array1.**reduce**(callbackfn[, initialValue])
+对数组中的所有元素调用指定的回调函数。该回调函数的返回值为累积结果，并且此返回值在下一次调用该回调函数时作为参数提供。callback最多可以接受4个参数。
+* array1.**reduceRight**(callbackfn[, initialValue])
+按降序顺序对数组中的所有元素调用指定的回调函数。该回调函数的返回值为累积结果，并且此返回值在下一次调用该回调函数时作为参数提供。
+* arrayObj.**reverse**() 
+反转数组，不新建数组！！！！
+* arrayObj.**shift**( )
+移除第一个元素并返回该元素
+* arrayObj.**slice**(start, [end]) 
+返回数组中的一部分，不改变原数组,如果 start 为负，则将其视为 length + start，其中 length 为数组的长度。如果 end 为负，则将其视为 length + end，其中 length 为数组的长度。
+* array1.**some**(callbackfn[, thisArg])
+检查元素符不符合条件，一个true就返回true
+* arrayobj.**sort**(sortFunction) 
+排序
+* arrayObj.**splice**(start, deleteCount, [item1[, item2[, . . . [,itemN]]]])
+从一个数组中移除元素，如有必要，在所移除元素的位置上插入新元素，并返回所移除的元素。会修改原数组！！！
+* array.**toString**()
+返回数组的字符串表示形式。将 Array 的元素转换为字符串。结果字符串被连接起来，用逗号分隔。
+* arrayObj.unshift([item1[, item2 [, . . . [, itemN]]]])
+数组开头加入新元素
+* array.**valueOf**()
+返回指定对象的基元值。就是返回数组本身。
+* arrayObj.**values**();
+返回一个**迭代器**，它返回数组的值。
