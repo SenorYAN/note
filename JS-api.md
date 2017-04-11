@@ -120,3 +120,18 @@ Returns an array of a given object's own enumerable values.
 返回指定对象的基元值。就是返回数组本身。
 * arrayObj.**values**();
 返回一个**迭代器**，它返回数组的值。
+
+## 字符串
+### 方法
+* strObj. **charAt**(index)
+返回指定索引位置处的字符。
+* strObj. **charCodeAt**(index)
+返回指定位置的字符的unicode值。
+* stringObj.**codePointAt**(pos);
+返回一个 Unicode utf-16 字符的码位。
+* string1. **concat**([string2[, string3[, . . . [, stringN]]]])
+返回由两个或两个以上的字符串串联而成的字符串。
+* stringObj.**endsWith**(str, [, position]);
+返回布尔值，该值指示字符串或子字符串是否以另一个指定字符串结尾。
+* stringObj.**includes**(substring [, position]);
+返回一个布尔值，该值指示传入字符串是否包含在字符串对象中。
