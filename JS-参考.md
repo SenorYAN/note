@@ -1,4 +1,4 @@
-# JS-api
+# JS-参考
 ## 变量
 undefined表示变量不含有值，变量设置成null视作清空变量。
 ## 对象
@@ -135,3 +135,43 @@ Returns an array of a given object's own enumerable values.
 返回布尔值，该值指示字符串或子字符串是否以另一个指定字符串结尾。
 * stringObj.**includes**(substring [, position]);
 返回一个布尔值，该值指示传入字符串是否包含在字符串对象中。
+* strObj. **indexOf**(subString[, startIndex])
+返回子字符串首次出现的位置。
+* strObj.**lastIndexOf**(substring[, startindex])
+返回字符串中子字符串最后出现的位置。
+* stringVar.**localeCompare**(stringExp[, locales][, options]) 
+确定两个字符串在当前区域设置中是否相等。
+* stringObj.**match**(rgExp) 
+将字符串与正则表达式匹配，并返回一个包含该搜索结果的数组。
+* stringObj.**normalize**([form]);
+返回指定字符串的 Unicode 范式
+* stringObj.**repeat**(count);
+返回一个新的字符串对象，它的值等于重复了指定次数的原始字符串。
+* stringObj. **replace**(rgExp, replaceText)
+使用正则表达式或搜索字符串替换字符串中的文本。
+* stringObj.**search**(rgExp) 
+查找正则表达式搜索中第一个子字符串匹配项。
+* stringObj.**slice**(start, [end]) 
+返回字符串片段。
+如果 start 为负，则将其视为 length + start，此处 length 为字符串的长度。如果 end 为负，则会将其视为 length + end。如果省略 end，则将一直复制到 stringObj 的结尾。如果 end 出现在 start 之前，则不会将任何字符复制到新字符串中。
+* stringObj.**split**([separator[, limit]])
+使用指定的分隔符将一个字符串拆分为多个子字符串，并将其以数组形式返回。
+* stringObj.**startsWith**(str, [, position]);
+返回一个值，该值指示字符串或子字符串是否以另一个指定字符串开头。
+* stringvar.**substr**(start [, length ]) 
+获取一个从指定位置开始并具有指定长度的子字符串。有点类似splice。
+如果 length 为 0 或负数，则返回一个空字符串。如果没有指定该参数，则子字符串将延续到 stringvar 的结尾。
+* strVariable. **substring**(start [, end])
+返回位于 String 对象中的指定位置的子字符串。不包括end。
+substring 方法使用 start 和 end 两者中的较小值作为子字符串的起始点。例如，strvar.substring(0, 3) 和 strvar.substring(3, 0) 将返回相同的子字符串。
+如果 start 或 end 为 NaN 或负数，那么它将被替换为 0。
+* stringVar.**toLocaleLower／UpperCase**( )
+将所有字母字符都转换为小／大写形式，并考虑主机环境的当前区域设置。
+* strVariable.**toLower／UpperCase**()
+将字符串中的所有字母字符转换为小／大写形式。
+* stringObj.**trim**()
+从字符串中移除前导空格、尾随空格和行终止符。
+* string.**toString**()
+返回字符串的字符串表示形式。
+* string.**valueOf**()
+返回字符串。
