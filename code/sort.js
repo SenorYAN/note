@@ -149,6 +149,51 @@ function shellSort(arr) {
 
 console.log('希尔排序：', shellSort([23,0,32,45,56,75,43,0,34]));
 
+//归并排序
+function merge(left, right) {
+    var result =[];
+    if(!Array.isArray(left)){
+        left = [left];
+    }
+    if(!Array.isArray(right)){
+        right = [right];
+    }
+    while(left.length > 0 && right.length>0){
+        if(left[0] < right[0]){
+            result.push(left.shift());
+        }else{
+            result.push(right.shift());
+        }
+    }
+    return result.concat(left, right);
+}
+function mergeSort(arr){
+    var length =arr.length,
+        lim,
+        work,
+        i,j,k;
+    if(length == 1) return arr;
+    work = arr.slice();
+    work.push([]);
+
+    for(lim=length; lim>1;){
+        for(j=0,k=0;k<lim;j++,k=k+2){
+            work[j] = merge(work[k], work[k+1]);
+        }
+        work[j] = [];
+        lim=Math.floor(lim+1)/2;
+    }
+    return work[0];
+}
+
+console.log('归并排序：', mergeSort([23,0,32,45,56,75,43,0,34]));
+
+//堆排序
+function heapSort(){
+
+}
+
+console.log('堆排序：', heapSort([23,0,32,45,56,75,43,0,34]));
 
 
 
