@@ -48,3 +48,37 @@ main.js:1283 2 Thu Apr 20 2017 22:25:31 GMT+0800 (CST) "success"
 main.js:1286 3 Thu Apr 20 2017 22:25:31 GMT+0800 (CST) "success"
 ```
 
+
+## async & await
+* 基本用法
+async函数返回一个 Promise 对象，可以使用then方法添加回调函数。当函数执行的时候，一旦遇到await就会先返回，等到异步操作完成，再接着执行函数体内后面的语句。
+```javascript
+async function timeout(ms) {
+  await new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
+async function asyncPrint(value, ms) {
+  await timeout(ms);
+  console.log(value);
+}
+
+asyncPrint('hello world', 50);
+```
+
+* async函数返回一个 Promise 对象。
+async函数内部return语句返回的值，会成为then方法回调函数的参数。
+```javascript
+async function f() {
+  throw new Error('出错了');
+}
+
+f().then(
+  v => console.log(v),
+  e => console.log(e)
+)
+// Error: 出错了
+```
+
+* 正常情况下，await命令后面是一个 Promise 对象。如果不是，会被转成一个立即resolve的 Promise 对象。
