@@ -1,5 +1,5 @@
 # 3main
-布局、闭包、跨域
+布局、闭包、跨域、大小
 ## 布局
 ### 圣杯布局
 * 1、左固定主内容自适应／右固定主内容自适应
@@ -226,5 +226,14 @@ a.myLabel(); //"obj a"
 
 用Object.assign扩展原型，将不会有__proto__的指向，用Object.create和new有效，ES6开始可以用Object.setPrototypeOf( Son.prototype,  Father.prototype)
 
+
+## 大小
+![](3main/B2703521-81AE-46BB-870B-E3CC49E01546.png)
+* outerWidth／outerHeight
+IE、Safari、Firefox返回浏览器窗口本身尺寸
+* innerWidth／innerHeight
+IE、Safari、Firefox返回该容器中页面视图区的大小
+* Chrome中inner和outer都返回视口大小（viewpoint）
+* 目前基本浏览器都用document.documentElement.clientWidth_Height保存了页面视口的信息。IE6需要通过document.body.clientWidth_Height
 
 
