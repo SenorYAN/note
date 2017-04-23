@@ -1,6 +1,50 @@
 # 3main
 布局、闭包、跨域、大小
 ## 布局
+### 基本布局
+* 水平居中
+```css
+//不定width
+.parent{text-align: center;} 
+.child{display: inline-block;}
+
+//定width
+.child{
+	width：200px;
+	display: margin 0 auto;
+}
+
+//flex
+.parent{
+	display: flex;
+	justify-content: center;
+}
+```
+* 垂直居中
+```css
+//使用vertical-align
+.parent{
+	display:inline-block;
+	vertical-align:middle;
+	line-height:20px;
+}
+//绝对定位
+.parent{position:relative;} 
+.child{
+	positon:absolute;
+	top:50%;
+	transform:translate(0,-50%);
+}
+//flex
+.parent{
+	display:flex;
+	align-items:center;
+}
+```
+
+### 多列布局
+* 左定宽，右边自适应
+
 ### 圣杯布局
 * 1、左固定主内容自适应／右固定主内容自适应
 ```css
@@ -236,4 +280,38 @@ IE、Safari、Firefox返回该容器中页面视图区的大小
 * Chrome中inner和outer都返回视口大小（viewpoint）
 * 目前基本浏览器都用document.documentElement.clientWidth_Height保存了页面视口的信息。IE6需要通过document.body.clientWidth_Height
 
+
+## 深拷贝
+```javascript
+function deepCopy(obj){
+    var newObj, currentQueue, newQueue;
+    if(Object.prototype.toString.call(obj) !== '[object Object]'){
+        return obj;
+    }
+    if(Object.prototype.toString.call(obj) !== '[object Array]'){
+        newObj = {};
+    }else{
+        newObj = [];
+    }
+    currentQueue = [obj];
+    newQueue = [newObj];
+    while(currentQueue.length){
+        var obj1 = currentQueue.shift(), obj2 = newQueue.shift();
+        for(var key in obj1){
+            if(Object.prototype.toString.call(obj1[key]) !== '[object Object]'){
+                obj2[key] = obj1[key];
+            }else{
+                if(Object.prototype.toString.call(obj1[key]) !== '[object Array]'){
+                       obj2[key] = {};
+                }else{
+                        obj2[key] = [];
+                }
+                currentQueue.push(obj1[key]);
+                newQueue.push(obj2[key]);
+            }
+        }
+    }
+    return newObj; 
+}
+```
 
