@@ -109,3 +109,7 @@ Component.proptypes = {
   })
 }
 ```
+
+7、关于this的bind问题
+bind集中在constructor中，不要在props里写，避免重复。
+可以用箭头函数，自动绑定this
