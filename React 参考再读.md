@@ -110,6 +110,16 @@ Component.proptypes = {
 }
 ```
 
-7、关于this的bind问题
+* 7、关于this的bind问题
 bind集中在constructor中，不要在props里写，避免重复。
 可以用箭头函数，自动绑定this
+
+* 8、PureComponent
+PureComponent改变了生命周期方法 shouldComponentUpdate ，并且它会自动检查组件是否需要重新渲染。这时，只有PureComponent检测到 state 或者 props 发生变化时，PureComponent才会调用 render 方法。
+应该在没有子组件和只负责UI展示的组件里使用pure
+
+* 9、生命周期详细总结
+> 创建并插入dom，依次调用：  
+> constructor  ->  componentWillMount -> render -> componentDidMount  
+> 更新状态：  
+> componentWillReceiveProps -> shouldComponentUpdate -> componentWillUpdate -> render -> componentDidUpdate  
