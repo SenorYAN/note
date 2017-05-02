@@ -123,3 +123,5 @@ PureComponent改变了生命周期方法 shouldComponentUpdate ，并且它会�
 > constructor  ->  componentWillMount -> render -> componentDidMount  
 > 更新状态：  
 > componentWillReceiveProps -> shouldComponentUpdate -> componentWillUpdate -> render -> componentDidUpdate  
+> 卸载：  
+> componentWillUnmount  
