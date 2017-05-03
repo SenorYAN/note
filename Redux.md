@@ -20,3 +20,11 @@ function todoApp(state = initialState, action) {
 > reducer千万不要修改state，使用Object.assign({}, state,  newState)  
 > 在 default 情况下返回旧的 state。遇到未知的 action 时，一定要返回旧的 state。  
 注意每个 reducer 只负责管理全局 state 中它负责的一部分。每个 reducer 的 state 参数都不同，分别对应它管理的那部分 state 数据。
+
+## 3、store
+Store 就是把它们联系到一起的对象。Store 有以下职责：
+* 维持应用的 state；
+* 提供 getState() 方法获取 state；
+* 提供 dispatch(action) 方法更新 state；
+* 通过 subscribe(listener) 注册监听器;
+* 通过 subscribe(listener) 返回的函数注销监听器。
