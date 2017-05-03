@@ -61,3 +61,6 @@ let intersect = new Set([...a].filter(x => b.has(x)));
 // 差集
 let difference = new Set([...a].filter(x => !b.has(x)));
 ```
+
+* WeakSet：成员只能是对象
+WeakSet 的一个用处，是储存 DOM 节点，而不用担心这些节点从文档移除时，会引发内存泄漏。
