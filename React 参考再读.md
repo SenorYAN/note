@@ -125,3 +125,34 @@ PureComponent改变了生命周期方法 shouldComponentUpdate ，并且它会�
 > componentWillReceiveProps -> shouldComponentUpdate -> componentWillUpdate -> render -> componentDidUpdate  
 > 卸载：  
 > componentWillUnmount  
+
+* 10、setStateAsync
+```javascript
+  setStateAsync(state) {
+    return new Promise((resolve) => {
+      this.setState(state, resolve)
+    });
+  }
+
+  async componentDidMount() {
+    StatusBar.setNetworkActivityIndicatorVisible(true)
+    const res = await fetch('https://api.ipify.org?format=json')
+    const {ip} = await res.json()
+    await this.setStateAsync({ipAddress: ip})
+    StatusBar.setNetworkActivityIndicatorVisible(false)
+  }
+```
+
+* 11、状态计算函数
+```javascript
+  incrementCount(){
+   this.setState((prevState, props) => ({
+      count: prevState.count + 1
+    }));
+   this.setState((prevState, props) => ({
+      count: prevState.count + 1
+    }));
+  }
+```
+
+第二个setState传入的prevState值就是第一个setState执行完毕之后的计数值，也顺利保证了连续自增两次。
