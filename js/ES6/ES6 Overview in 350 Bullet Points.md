@@ -24,6 +24,8 @@
 * Babel作为一个蓬勃发展的系统，已经支持了部分的ES2016和插件支持
 * [阅读ES6 Tooling的历史][25]
 
+## Assignment Destructuring
+* 1、`var {foo} = pony `等同于 `var foo = pony.foo`
 
 
 [1]: http://babeljs.io/ "Babel JavaScript Compiler"
