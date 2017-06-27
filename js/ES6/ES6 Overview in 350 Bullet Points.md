@@ -1,5 +1,5 @@
 # ES6 Overview in 350 Bullet Points
-https://github.com/bevacqua/es6 [原地址](https://github.com/bevacqua/es6)
+[本文原地址](https://github.com/bevacqua/es6) ，此处仅是翻译
 ## Introduction
 * ES6 — 也通常被熟知为Harmony，es-next，ES2015 — 目前这种语言最新规范（现在已经不是最新了）
 * ES6是2015年6月发布的规范
