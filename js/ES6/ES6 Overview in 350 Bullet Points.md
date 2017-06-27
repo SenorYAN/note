@@ -25,8 +25,11 @@
 * [阅读ES6 Tooling的历史][25]
 
 ## Assignment Destructuring
-* 1、`var {foo} = pony `等同于 `var foo = pony.foo`
-
+* `var {foo} = pony `等同于 `var foo = pony.foo`
+* `var {foo: baz} = pony` 等同于 `var baz = pony.foo`
+* 你可以设定默认值，`var {foo='bar'} = baz`将会在`baz.foo`是`undefined`时给`baz.foo`赋值’bar’
+* 可以随便设置几个属性，设置别名也可以不设置
+	* `var {foo, bar: baz} = {foo: 0, bar: 1}`  使得`foo: 0` 和 `baz: 1`
 
 [1]: http://babeljs.io/ "Babel JavaScript Compiler"
 [2]: https://github.com/babel/babelify "babel/babelify on GitHub"
