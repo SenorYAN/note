@@ -24,12 +24,26 @@
 * Babel作为一个蓬勃发展的系统，已经支持了部分的ES2016和插件支持
 * [阅读ES6 Tooling的历史][25]
 
-## Assignment Destructuring
+## Assignment Destructuring 解构赋值
 * `var {foo} = pony `等同于 `var foo = pony.foo`
 * `var {foo: baz} = pony` 等同于 `var baz = pony.foo`
 * 你可以设定默认值，`var {foo='bar'} = baz`将会在`baz.foo`是`undefined`时给`baz.foo`赋值’bar’
 * 可以随便设置几个属性，设置别名也可以不设置
 	* `var {foo, bar: baz} = {foo: 0, bar: 1}`  使得`foo: 0` 和 `baz: 1`
+* 你能设置更深层的属性，`var {foo: {bar}} = { foo: { bar: 'baz' } }`使得`bar: 'baz'`
+* 你也可以设置别名，`var {foo: {bar: deep}} = { foo: { bar: 'baz' } }` 使得`deep='baz'`
+* 找不到的属性通常会返回`undefined`，例如：`var {foo} = {}`
+* 深层属性找不到的时候会返回一个错误，例如：`var {foo: {bar}} = {}`
+* 数组也同样有效，`var [a, b] = [0, 1]`，使得`a：0， b：0`
+* 数组中也可以跳过一些元素，比如`var [a, , b] = [0, 1, 2]`使得 `a: 0 and b: 2`
+* 你也可以不用辅助变量来交换，`[a, b] = [b, a]`
+* 你也可以在函数里使用解构赋值
+	* 像`function foo (bar=2) {}`一样设定参数默认值
+	* 默认值也可以是对象，`function foo (bar={ a: 1, b: 2 }) {}`
+	* 像`function foo ({ a=1, b=2 }) {}`一样完全解构
+	* 当什么也没有提供时，默认值设置为空对象，`function foo ({ a=1, b=2 }) {}`
+	* [深度阅读解构赋值][3]
+
 
 [1]: http://babeljs.io/ "Babel JavaScript Compiler"
 [2]: https://github.com/babel/babelify "babel/babelify on GitHub"
