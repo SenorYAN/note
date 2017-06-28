@@ -36,6 +36,7 @@
 	* ES6我们还称它ES6
 	* 从ES2016（ES7）开始，我们开始用ES[YYYY]的方式给新版本命名
 	* 命名方案的主要原因是迫使浏览器供应商快速实现最新功能
+	
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
 # Tooling
@@ -52,6 +53,7 @@
 * 也可以使用`bable-node`使得任何版本的node使用ES6，它把模块都转换到ES5
 * Babel作为一个蓬勃发展的系统，已经支持了部分的ES2016和插件支持
 * [阅读ES6 Tooling的历史][25]
+
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
 # Assignment Destructuring 
@@ -73,6 +75,7 @@
 	* 像`function foo ({ a=1, b=2 }) {}`一样完全解构
 	* 当什么也没有提供时，默认值设置为空对象，`function foo ({ a=1, b=2 }) {}`
 	* [深度阅读解构赋值][3]
+	
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
 
@@ -90,8 +93,11 @@
 	* 解构的时候也很有用，`[a, , ...rest] = [1, 2, 3, 4, 5]`使得`a: 1` 和 `rest: [3, 4, 5]`
 	* 使得`new`操作和`apply`更加不费力，`new Date(...[2015, 31, 8])`
 	*  [阅读更多ES6展开][6]
+	
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
+# Arrow Functions
+* 可以用箭头函数来简明的申明函数，像`param => returnValue`
 
 [1]: http://babeljs.io/ "Babel JavaScript Compiler"
 [2]: https://github.com/babel/babelify "babel/babelify on GitHub"
