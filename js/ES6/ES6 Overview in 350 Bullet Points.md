@@ -54,7 +54,7 @@
 * [阅读ES6 Tooling的历史][25]
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
-# Assignment Destructuring 解构赋值
+# Assignment Destructuring 
 * `var {foo} = pony `等同于 `var foo = pony.foo`
 * `var {foo: baz} = pony` 等同于 `var baz = pony.foo`
 * 你可以设定默认值，`var {foo='bar'} = baz`将会在`baz.foo`是`undefined`时给`baz.foo`赋值’bar’
@@ -77,6 +77,20 @@
 
 
 # Spread Operator and Rest Parameters
+* 不定变量是更好的参数模式
+	* 可以在函数中像这样声明变量，`function foo (...everything) {}`
+	* `everything`是所有传入`foo`的参数数组
+	* 你也可以在`...everything`之前定义一些变量，`function foo (bar, ...rest) {}`
+	* 自定义的变量不包括在`...rest`中
+	* `...rest`必须是列表中最后的一个变量
+* 展开操作符相当魔幻
+	* 使用方法时不用再用apply，`fn(...[1, 2, 3])` 相当于 `fn(1, 2, 3)`
+	* 更容易的数组连接，`[1, 2, ...[3, 4, 5], 6, 7]`
+	* 类数组结构转换成数组，例如`[...document.querySelectorAll('img')]`
+	* 解构的时候也很有用，`[a, , ...rest] = [1, 2, 3, 4, 5]`使得`a: 1` 和 `rest: [3, 4, 5]`
+	* 使得`new`操作和`apply`更加不费力，`new Date(...[2015, 31, 8])`
+	*  [阅读更多ES6展开][6]
+<sup>[(back to table of contents)](#table-of-contents)</sup>
 
 
 [1]: http://babeljs.io/ "Babel JavaScript Compiler"
