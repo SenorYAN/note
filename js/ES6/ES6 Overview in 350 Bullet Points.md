@@ -98,6 +98,23 @@
 
 # Arrow Functions
 * 可以用箭头函数来简明的申明函数，像`param => returnValue`
+* 在函数功能性操作时很有用，`[1, 2].map(x => x * 2)`
+* 有一些需要你熟悉的技巧
+	* 单参数时，`p1 => expr`
+	* `p1 => expr`有一个隐形的return，返回值是`expr`
+	* 要返回一个对象，必须包裹在一对括号里，像`() => ({ foo: 'bar' }) `这样，否则会返回错误
+	* 当你有0个，2个或者更多个参数时，括号也是必须的
+	* 右侧中括号表示有多句语句的代码块
+	* 当使用代码块时，没有隐形返回，必须使用return
+	* 你不能命名静态的箭头函数，但是当它运行时，对大多数方法而言推断出名字很容易
+	* 箭头函数被绑定于上下文作用域
+		* this和父作用域中的this一致
+		* this不能够被call，apply或者其他方法改变
+		* arguments值也被绑定到最近的普通函数，内部变量使用（…args）来获取
+	* [阅读更多箭头函数][5]
+
+<sup>[(back to table of contents)](#table-of-contents)</sup>
+
 
 [1]: http://babeljs.io/ "Babel JavaScript Compiler"
 [2]: https://github.com/babel/babelify "babel/babelify on GitHub"
