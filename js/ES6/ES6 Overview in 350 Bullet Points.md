@@ -1,6 +1,34 @@
 # ES6 Overview in 350 Bullet Points
 [本文原地址](https://github.com/bevacqua/es6) ，此处仅是翻译
-## Introduction
+
+# Table of Contents
+* [Introduction](#introduction)
+* [Tooling](#tooling)
+* [Assignment Destructuring](#assignment-destructuring)
+* [Spread Operator and Rest Parameters](#spread-operator-and-rest-parameters)
+* [Arrow Functions](#arrow-functions)
+* [Template Literals](#template-literals)
+* [Object Literals](#object-literals)
+* [Classes](#classes)
+* [Let and Const](#let-and-const)
+* [Symbols](#symbols)
+* [Iterators](#iterators)
+* [Generators](#generators)
+* [Promises](#promises)
+* [Maps](#maps)
+* [WeakMaps](#weakmaps)
+* [Sets](#sets)
+* [WeakSets](#weaksets)
+* [Proxies](#proxies)
+* [Reflection](#reflection)
+* [`Number`](#number)
+* [`Math`](#math)
+* [`Array`](#array)
+* [`Object`](#object)
+* [Strings and Unicode](#strings-and-unicode)
+* [Modules](#modules)
+
+# Introduction
 * ES6 — 也通常被熟知为Harmony，es-next，ES2015 — 目前这种语言最新规范（现在已经不是最新了）
 * ES6是2015年6月发布的规范
 * 未来版本的规范命名将以ES[YYYY]的形式，例如：ES2016代表ES7
@@ -8,8 +36,9 @@
 	* ES6我们还称它ES6
 	* 从ES2016（ES7）开始，我们开始用ES[YYYY]的方式给新版本命名
 	* 命名方案的主要原因是迫使浏览器供应商快速实现最新功能
+<sup>[(back to table of contents)](#table-of-contents)</sup>
 
-## Tooling
+# Tooling
 * ES6要使用需要一个JS-to-JS转换器
 * 转换器用来
 	* 把最新版本的代码转换成老版本
@@ -23,8 +52,9 @@
 * 也可以使用`bable-node`使得任何版本的node使用ES6，它把模块都转换到ES5
 * Babel作为一个蓬勃发展的系统，已经支持了部分的ES2016和插件支持
 * [阅读ES6 Tooling的历史][25]
+<sup>[(back to table of contents)](#table-of-contents)</sup>
 
-## Assignment Destructuring 解构赋值
+# Assignment Destructuring 解构赋值
 * `var {foo} = pony `等同于 `var foo = pony.foo`
 * `var {foo: baz} = pony` 等同于 `var baz = pony.foo`
 * 你可以设定默认值，`var {foo='bar'} = baz`将会在`baz.foo`是`undefined`时给`baz.foo`赋值’bar’
@@ -43,6 +73,10 @@
 	* 像`function foo ({ a=1, b=2 }) {}`一样完全解构
 	* 当什么也没有提供时，默认值设置为空对象，`function foo ({ a=1, b=2 }) {}`
 	* [深度阅读解构赋值][3]
+<sup>[(back to table of contents)](#table-of-contents)</sup>
+
+
+# Spread Operator and Rest Parameters
 
 
 [1]: http://babeljs.io/ "Babel JavaScript Compiler"
