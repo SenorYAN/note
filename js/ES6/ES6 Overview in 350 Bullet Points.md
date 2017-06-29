@@ -132,6 +132,26 @@
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
+# Object Literals
+* 可以只用`{ foo }`来代替`{ foo: foo }`
+* 可以使用计算属性，`{ [prefix + 'Foo']: 'bar' }`, 当 `prefix: 'moz'`时， `{ mozFoo: 'bar' }`
+* 使用计算属性的同时不能使用缩写，`{ [foo] }`是非法的
+* 对象字面量中函数定义中使用更加简洁的语法
+* 在 [`Object`](#object) 章节了解更多
+
+<sup>[(back to table of contents)](#table-of-contents)</sup>
+
+# Classes
+* 不是传统的类，是原型继承的语法糖  
+* 语法和声明对象很像，`class Foo {}`
+* 实例方法的声明可以用简短的对象字面量语法，`class Foo { bar () {} }`
+* 静态方法需要`static`关键字前缀，`class Foo { static isPonyFoo () {} }`
+* 可以用构造器方法`class Foo { constructor () { /* 初始值 */ } }`
+* 原型继承有着更简单的语法，`class PonyFoo extends Foo {}`
+* [阅读更多类][8]
+
+<sup>[(back to table of contents)](#table-of-contents)</sup>
+
 
 [1]: http://babeljs.io/ "Babel JavaScript Compiler"
 [2]: https://github.com/babel/babelify "babel/babelify on GitHub"
