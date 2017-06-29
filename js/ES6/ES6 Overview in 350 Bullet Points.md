@@ -152,6 +152,30 @@
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
+# Let and Const
+* `let`和`const`是声明变量时`var`的其他选择
+* `let`是块作用域而不是函数作用域
+* `let`需要悬挂在代码块的顶部，而`var`放在函数的顶部
+* 临时死区
+	* 临时死区从一个有`let`申明的区块顶部开始
+	* 到出现`let`申明为止（与悬挂无关）
+	* 在临时死区里（`let`申明之前）使用`let`申明的变量会返回一个错误
+	* 有助于避免一些奇怪的错误，当一个变量在声明之前调用
+* `const`也是块作用域的，需要悬挂在顶上，被临时死区约束
+* `const`申明的变量必须有初始值
+* 在声明之后，修改`const`变量会默默的失败（不报错），在严格模式下会抛出异常
+* `const`申明的变量，不会导致引用值不可变
+	* `const foo = { bar: 'baz' } `意味着`foo`永远指向右侧的对象
+	* ` foo.bar = ‘boo’`不会抛出异常
+* 声明同名变量会抛出异常
+* 为了修正重新分配变量时和丢失指向时出现的错误
+* ES6中函数都是块作用域
+	* 避免因为变量置顶而泄漏作用域，`{ let _foo = 'secret', bar = () => _foo; }`
+	* 无论你想要怎样，大部分场合不要破开用户代码
+* [阅读更多变量声明和暂时性死区][9]
+
+<sup>[(back to table of contents)](#table-of-contents)</sup>
+
 
 [1]: http://babeljs.io/ "Babel JavaScript Compiler"
 [2]: https://github.com/babel/babelify "babel/babelify on GitHub"
