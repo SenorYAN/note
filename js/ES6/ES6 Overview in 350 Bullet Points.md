@@ -120,9 +120,18 @@
 * 包裹在反引号里的字符串称作模版字符串
 * 模版字符串可以是多行的
 * 模版字符串允许插入变量，当`rating`是变量时，可以这么使用 `` `ponyfoo.com is ${rating}` ``
-* 你也可以在插入变量中使用合理的js表达，例如such as `` `${2 * 3}` `` or `` `${foo()}` ``
+* 你也可以在插入变量中使用合理的js表达，例如 `` `${2 * 3}` `` or `` `${foo()}` ``
 * 你也可以用标签模版来改变插入的js表达
 	* 在模版字符串前面 加一个前缀，``fn`foo, ${bar} and ${baz}` ``
+	* fn是一个被调用的函数
+	* 模版是`['foo, ', ' and ', '']`，变量表达是`bar`和`baz`
+	* fn的返回值是模版字符串的值
+	* 尽可能使用包括表达式，插入参数，等等
+* 模版字符串比包裹在单引号或者双引号里面的字符串更好
+*  [阅读更多模版字符串][4]
+
+<sup>[(back to table of contents)](#table-of-contents)</sup>
+
 
 [1]: http://babeljs.io/ "Babel JavaScript Compiler"
 [2]: https://github.com/babel/babelify "babel/babelify on GitHub"
