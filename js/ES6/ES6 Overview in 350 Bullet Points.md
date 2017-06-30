@@ -176,6 +176,11 @@
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
+# Symbols
+* Symbol是ES6中新的原始值类型
+* 你可以通过`var symbol = Symbol()`创建自己的symbol
+* 调试的时候你可以在Symbol中加一个描述，`Symbol('ponyfoo')`
+* Symbols不可枚举且独一无二的，`Symbol()`, `Symbol()`, `Symbol('foo')` and `Symbol('foo')` 统统不一样
 
 [1]: http://babeljs.io/ "Babel JavaScript Compiler"
 [2]: https://github.com/babel/babelify "babel/babelify on GitHub"
