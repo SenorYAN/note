@@ -181,6 +181,20 @@
 * 你可以通过`var symbol = Symbol()`创建自己的symbol
 * 调试的时候你可以在Symbol中加一个描述，`Symbol('ponyfoo')`
 * Symbols不可枚举且独一无二的，`Symbol()`, `Symbol()`, `Symbol('foo')` and `Symbol('foo')` 统统不一样
+* Symbols的类型是symbol，`typeof Symbol() === 'symbol'`
+* 你可以用`Symbol.for(key)`创建新的全局symbols
+	* 假如symbol提供的key已经存在，它就会指向那个存在的symbol
+```javascript
+var s1 = Symbol.for('foo');
+var s2 = Symbol.for('foo');
+
+s1 === s2 // true
+```
+	* 否则将会新建一个symbol
+	* `Symbol.keyFor`方法返回一个已登记的 Symbol 类型值的key
+* - Read [ES6 Symbols in Depth][12]
+
+<sup>[(back to table of contents)](#table-of-contents)</sup>
 
 [1]: http://babeljs.io/ "Babel JavaScript Compiler"
 [2]: https://github.com/babel/babelify "babel/babelify on GitHub"
