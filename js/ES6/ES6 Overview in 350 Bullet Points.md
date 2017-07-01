@@ -192,9 +192,30 @@ s1 === s2 // true
 ```
 	* 否则将会新建一个symbol
 	* `Symbol.keyFor`方法返回一个已登记的 Symbol 类型值的key
-* - Read [ES6 Symbols in Depth][12]
+* Read [ES6 Symbols in Depth][12]
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
+
+# Iterators
+* 迭代器和迭代协议决定了在任何对象上如何迭代，而不只是数组和类数组结构
+* Symbol用作给对象分配迭代器
+* `var foo = { [Symbol.iterator]: iterable}` 或者 `foo[Symbol.iterator] = iterable`
+* `iterable`是一个能返回带有`next`方法的迭代器的方法
+* `next`方法返回的对象有两个属性，`value`和`done`
+	* `value`属性指明迭代队列中当前的值
+	* `done`属性指明是否还有更多的值迭代
+* 有`[Symbol.iterator]`属性的对象是可迭代的，这个属性决定了迭代协议
+* 内置的数组，字符串，或者参数对象，或者浏览器里的节点列表，在ES6中都是默认可以迭代的
+* 可迭代对象可以通过`for···of`来循环遍历，例如`for (let el of document.querySelectorAll('a'))`
+* 可迭代对象可以用展开操作符合成，例如`[...document.querySelectorAll('a')]`
+* 可以使用`Array.from`来把可迭代序列专程数组
+* 迭代器是懒惰的，会产生一个无线序列直到出现一个合法程序
+* 不要用`...`或者`Array.from`合成一个无限序列，因为这会导致无限循环
+* Read [ES6 Iterators in Depth][10]
+
+<sup>[(back to table of contents)](#table-of-contents)</sup>
+
+
 
 [1]: http://babeljs.io/ "Babel JavaScript Compiler"
 [2]: https://github.com/babel/babelify "babel/babelify on GitHub"
