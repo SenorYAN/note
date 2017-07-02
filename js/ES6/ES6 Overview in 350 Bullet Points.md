@@ -215,6 +215,27 @@ s1 === s2 // true
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
+# Generators
+* 继发器函数是一种特殊的迭代器，它用`function* generator () {}`的语法声明
+* 继发器函数用`yeild`来从元素序列里输出
+* 继发器函数也可以用`yield*`来输出另一个继发器函数—或者任何一个可迭代对象
+* 继发器函数返回一个继迭代器对象
+* 也可以用`Array.from(g)`,` [...g]`,` for (let item of g)`, 或者只是 `g.next()`来展开数据
+* 继发器函数的执行是可以暂停的，四种情形下请记住最后的位置
+	* `yeild`输出序列中下一个值
+	* `return`返回序列中最后一个值
+	* `throw`完全终止继发器操作
+	* 	继发器函数进行到最后的标志是`{ done: true }`
+	* 一旦继发器序列结束了，`next`方法只会简单的返回`{ done: true }`而没有其他作用
+	* 继发器使得异步流看起来像同步
+		* 使用用户提供的继发器函数
+		* 代码在异步发生的地方停止
+		* 调用`next`方法，继续执行
+	*  Read [ES6 Generators in Depth][11]
+
+<sup>[(back to table of contents)](#table-of-contents)</sup>
+
+# 
 
 
 [1]: http://babeljs.io/ "Babel JavaScript Compiler"
