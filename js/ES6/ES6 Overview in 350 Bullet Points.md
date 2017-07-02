@@ -235,8 +235,30 @@ s1 === s2 // true
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
-# 
+# Promises
+* `Promises/A+`规范在ES6标准化发布之前，已经被广泛应用（例如：bluebird）
+* `Promise`是树形结构，通过`p.then(handler)` 和`p.catch(handler)`增加分支
+* 通过`new Promise((resolve, reject) => { /* resolver */ })`新建`Promise`
+	* `resolve(value)`回调函数，根据提供的`value`值完成`Promise`
+	* `reject(reason)`回调函数，根据提供的理由，拒绝Promise，返回一个错误
+	* 你可以异步调用这些方法，这些Promise树的深层分支
+* 每次调用`then`和`catch`都会返回另一个promise
+* Promises开始时是pending状态，无论完成和拒绝都会使得promise完成
+* Promise一旦完成就不能改变状态
+* 你可以串联随意多少个promises
+* 每个分支要不然使用then，要不然使用catch，不能两件都用
+* then回调函数转换前一个分支返回的值
+* then回调函数会阻断另一个promise
+* `p.catch(fn).catch(fn)`不会如你所愿，除非你想要捕获错误里面的错误
+* Promise.resolve(value) 返回一个`value`值的完成状态的promise
+* Promise.reject(reason) 返回一个`reason`原因的拒绝状态的promise
+* Promise.all(...promises) 当所有promise完成或者有一个被拒绝时返回一个promise
+* Promise.race(…promises)只要有一个promise完成就完成
+* Read [ES6 Promises in Depth][32]
 
+<sup>[(back to table of contents)](#table-of-contents)</sup>
+
+ 
 
 [1]: http://babeljs.io/ "Babel JavaScript Compiler"
 [2]: https://github.com/babel/babelify "babel/babelify on GitHub"
