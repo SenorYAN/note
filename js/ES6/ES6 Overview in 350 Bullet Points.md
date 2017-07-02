@@ -274,7 +274,17 @@ s1 === s2 // true
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
+# WeakMaps
+* 和Map类似，但是不完全一样
+* `WeakMap`是不可迭代的，所以你不能获取到枚举方法，比如`.forEach`, `.clear`这样Map中的方法
+* `WeakMap`的键必须是引用类型（对象），你不可以使用symbols, numbers, 或者 string作为键
+* `WeakMap`的键名所指向的对象，不计入垃圾回收机制
+* `WeakMap`的设计目的在于，有时我们想在某个对象上面存放一些数据，但是这会形成对于这个对象的引用
+* Read [ES6 WeakMaps in Depth][29]
 
+<sup>[(back to table of contents)](#table-of-contents)</sup>
+
+# Sets
  
 
 [1]: http://babeljs.io/ "Babel JavaScript Compiler"
