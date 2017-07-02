@@ -258,6 +258,23 @@ s1 === s2 // true
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
+# Maps
+* 用普通JS对象创建哈希表
+	* 避免了一些用户提供key值导致的安全问题
+	* 允许key是任意值，你甚至可以用DOM元素和函数添加记录
+* Map支持可迭代协议
+* 使用`new Map()`创建新的Map
+* 使用迭代器初始化Map，像`[[key1, value1], [key2, value2]] ` in `new Map(iterable)`
+* 使用`map.set(key, value)`来设置键值
+* 使用`map.get(key)`来获取键值
+* 使用`map.has(key)`来检查是否有键值
+* 使用`map.delete(key)`删除键值
+* map也可以使用迭代器，展开符，Array.from等等
+* Read [ES6 Maps in Depth][13]
+
+<sup>[(back to table of contents)](#table-of-contents)</sup>
+
+
  
 
 [1]: http://babeljs.io/ "Babel JavaScript Compiler"
