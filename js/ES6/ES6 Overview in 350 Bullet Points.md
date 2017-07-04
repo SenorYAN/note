@@ -315,6 +315,19 @@ s1 === s2 // true
 * `Reflection`的方法明显属于内部方法，例如：`Reflect.defineProperty`出错时返回一个布尔值，而不是抛出错误
 （待补充）
 
+# Number
+* `0b`前缀表示2进制，`0o`前缀表示8进制整型
+* `Number.isNaN` 和 `Number.isFinite`这两个函数和同名全局函数类似，但是它们不强制要求输入转为number。Number.isNaN()只有对于NaN才返回true，非NaN一律返回false。
+* `Number.parseInt` 和 `Number.parseFloat`和它俩的同名全局函数完全一致。
+* `Number.isInteger`检查`Number`值是否有小数部分
+* `Number.EPSILON`是极小的常量，实质就是可以接受的极小误差
+* `Number.MAX_SAFE_INTEGER`是JS中最安全的最大的整数（-2^53到2^53之间）
+* `Number.MIN_SAFE_INTEGER`是JS中最安全的最小的整数（-2^53到2^53之间）
+* `Number.isSafeInteger`检查数是否在-2^53到2^53之间这个安全范围内
+* Read [ES6 `Number` Improvements in Depth][19]
+
+<sup>[(back to table of contents)](#table-of-contents)</sup>
+
 [1]: http://babeljs.io/ "Babel JavaScript Compiler"
 [2]: https://github.com/babel/babelify "babel/babelify on GitHub"
 [3]: https://ponyfoo.com/articles/es6-destructuring-in-depth "ES6 Destructuring in Depth on Pony Foo"
