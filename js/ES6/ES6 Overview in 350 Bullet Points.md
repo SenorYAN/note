@@ -304,10 +304,16 @@ s1 === s2 // true
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
 # Proxies
+* Proxies通过`new Proxy(target, handler)`创建，`target`可以是任何的对象，`handle`是配置
+* `proxy`的默认表现是作为碰触`target`对象的途径，换句话说是`target`对象的一层过滤
+* `handler`决定了`target`对象的普通属性如何表现
+* handle也称作traps
+（待补充）
+
 # Reflection
 * `Reflection`是ES6新的内置静态对象（类似Math）
 * `Reflection`的方法明显属于内部方法，例如：`Reflect.defineProperty`出错时返回一个布尔值，而不是抛出错误
-* 
+（待补充）
 
 [1]: http://babeljs.io/ "Babel JavaScript Compiler"
 [2]: https://github.com/babel/babelify "babel/babelify on GitHub"
