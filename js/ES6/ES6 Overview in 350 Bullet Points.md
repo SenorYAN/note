@@ -275,7 +275,7 @@ s1 === s2 // true
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
 # WeakMaps
-* 和Map类似，但是不完全一样
+* 和`Map`类似，但是不完全一样
 * `WeakMap`是不可迭代的，所以你不能获取到枚举方法，比如`.forEach`, `.clear`这样Map中的方法
 * `WeakMap`的键必须是引用类型（对象），你不可以使用symbols, numbers, 或者 string作为键
 * `WeakMap`的键名所指向的对象，不计入垃圾回收机制
@@ -285,15 +285,25 @@ s1 === s2 // true
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
 # Sets
-* 和Map类似，但是不完全相同
-* Set没有key键，只有value值
+* 和`Map`类似，但是不完全相同
+* `Set`没有key键，只有value值
 * `set.set(value)`看起来不太对，所以我用`set.add(value)`替代
-* Set不能有重复的值，因为值同时也是键
+* `Set`不能有重复的值，因为值同时也是键
 *  Read [ES6 Sets in Depth][30]
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
 
+# WeakSets
+* `WeakSet`算是`Set`和`WeakMap`的一种杂交
+* `WeakSet`是不能迭代遍历和没有枚举方法的`Set`
+* `WeakSet`的值必须是引用值
+* 无论引用是否激活在用，`WeakSet`只是弱引用
+* Read [ES6 WeakSets in Depth][31]
+
+<sup>[(back to table of contents)](#table-of-contents)</sup>
+
+# Proxies
 
 
 [1]: http://babeljs.io/ "Babel JavaScript Compiler"
