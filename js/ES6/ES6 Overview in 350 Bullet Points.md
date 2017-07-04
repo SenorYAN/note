@@ -285,7 +285,16 @@ s1 === s2 // true
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
 # Sets
- 
+* 和Map类似，但是不完全相同
+* Set没有key键，只有value值
+* `set.set(value)`看起来不太对，所以我用`set.add(value)`替代
+* Set不能有重复的值，因为值同时也是键
+*  Read [ES6 Sets in Depth][30]
+
+<sup>[(back to table of contents)](#table-of-contents)</sup>
+
+
+
 
 [1]: http://babeljs.io/ "Babel JavaScript Compiler"
 [2]: https://github.com/babel/babelify "babel/babelify on GitHub"
