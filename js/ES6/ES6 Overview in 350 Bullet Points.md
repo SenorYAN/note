@@ -393,6 +393,31 @@ Math.atanh -- hyperbolic arc-tangent of a number
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
 
+# Modules
+* ES6模块系统默认开启严格模式
+* ES6的模块是输出API的文件
+* `export default value`输出一个默认绑定
+* `export var foo = 'bar'`输出一个命名绑定
+* `export { foo, bar }`输出了一个命名列表
+* `export { foo as ponyfoo }`把输出用`ponyfoo`引用
+* `export { foo as default }`把已命名的输出标记成默认输出
+* `export default api `中，要是api是一个对象，最好放在所有modules的最后，避免混淆
+* `import 'foo'`加载foo模块
+* `import foo from 'ponyfoo'` 从ponyfoo模块加载默认输出，并且标记为变量foo
+* `import {foo, bar} from 'baz`' 从baz模块中加载foo，bar等命名输出
+* `import {foo as bar} from 'baz'` 加载baz模块里面的foo，但使用心得bar变量引用
+*  `import {default} from 'foo'` 加载foo的默认输出
+* `import {default as bar} from 'foo'` 从foo中加载默认，并且用bar变量引用
+*  `import foo, {bar, baz} from 'foo' `把加载默认输出和命名输出整合在一句语句
+* `import * as foo from 'foo'` 加载整个的foo命名空间对象
+	* 包含所有的命名输出
+	* 包含默认输出
+* Read [ES6 Modules Additions in Depth][24]
+
+<sup>[(back to table of contents)](#table-of-contents)</sup>
+
+Time for a bullet point detox. Then again, I _did warn you_ to read the [article series][36] instead. Don't forget to subscribe and maybe even [contribute to keep Pony Foo alive][37]. Also, did you try the [Konami code][38] just yet?
+
 
 [1]: http://babeljs.io/ "Babel JavaScript Compiler"
 [2]: https://github.com/babel/babelify "babel/babelify on GitHub"
