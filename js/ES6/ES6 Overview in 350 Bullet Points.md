@@ -377,7 +377,13 @@ Math.atanh -- hyperbolic arc-tangent of a number
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
-
+# Strings and Unicode
+* 字符操作
+	* `String.prototype.startsWith` -- 是否字符串以指定的值开始
+	* `String.prototype.endsWith` -- 是否字符串以指定的值结束
+	* `String.prototype.includes` -- 字符串是否包含某个值	
+	* `String.prototype.repeat` -- 重复指定字符串指定遍数	
+	* `String.prototype[Symbol.iterator]` —让字符串也可以`for ... of`遍历
 
 
 
