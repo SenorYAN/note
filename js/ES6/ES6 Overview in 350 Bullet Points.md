@@ -384,6 +384,13 @@ Math.atanh -- hyperbolic arc-tangent of a number
 	* `String.prototype.includes` -- 字符串是否包含某个值	
 	* `String.prototype.repeat` -- 重复指定字符串指定遍数	
 	* `String.prototype[Symbol.iterator]` —让字符串也可以`for ... of`遍历
+* Unicode
+	* `String.prototype.codePointAt` --能够正确处理4个字节储存的字符，返回一个字符的码点
+	* `String.fromCodePoint` --用于从码点返回对应字符，但是这个方法不能识别32位的UTF-16字符
+	* `String.prototype.normalize` -- 用来将字符的不同表示方法统一为同样的形式，这称为Unicode正规化
+	* Read [ES6 Strings and Unicode Additions in Depth][23]
+
+<sup>[(back to table of contents)](#table-of-contents)</sup>
 
 
 
