@@ -366,7 +366,19 @@ Math.atanh -- hyperbolic arc-tangent of a number
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
-# 
+
+# Object
+* `Object.assign`递归重写对象的属性
+* `Object.is`类似于`===`操作符，但是`NaN`和`NaN`返回true，`+0`和`-0`返回false
+* `Object.getOwnPropertySymbols`返回对象所有的非继承属性
+* `Object.setPrototypeOf`改变原型，类似于`Object.prototype.__proto__ `的setter
+* See also [Object Literals](#object-literals) section
+* Read [ES6 `Object` Changes in Depth][22]
+
+<sup>[(back to table of contents)](#table-of-contents)</sup>
+
+
+
 
 
 [1]: http://babeljs.io/ "Babel JavaScript Compiler"
