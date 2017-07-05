@@ -351,6 +351,22 @@ Math.atanh -- hyperbolic arc-tangent of a number
 * Read ES6 Math Additions in Depth
 (back to table of contents)
 
+# Array
+* `Array.from`把类数组对象或者可遍历对象转换成数组
+* `Array.of`类似于`new Array(...items)`，但是和`new Array`不同在一个参数下的情况
+* `Array.prototype.copyWithin`把数组的一部分复制到另一部分
+* `Array.prototype.fill`给已存在的Array所有位置填充给定的值
+* `Array.prototype.find`找到第一个符合条件的数组元素
+* `Array.prototype.findIndex`找到第一个符合条件的数组元素的序号
+* `Array.prototype.keys`返回一个数组序号的迭代器
+* `Array.prototype.values`返回一个数组元素值的迭代器
+* `Array.prototype.entries`返回一个迭代器同时返回序号和值
+* `Array.prototype[Symbol.iterator]`和`Array.prototype.values`方法完全一致
+* Read [ES6 `Array` Extensions in Depth][21]
+
+<sup>[(back to table of contents)](#table-of-contents)</sup>
+
+# 
 
 
 [1]: http://babeljs.io/ "Babel JavaScript Compiler"
