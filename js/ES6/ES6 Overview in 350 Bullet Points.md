@@ -328,6 +328,31 @@ s1 === s2 // true
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
+# Math
+* `Math.sign`判断一个数是正的、负的还是0
+* `Math.trunc`返回一个数的整数部分
+* `Math.cbrt`计算一个数的立方根
+* `Math.expm1`返回`evalue - 1`
+* `Math.log1p`返回1 + x的自然对数，即Math.log(1 + x)。如果x小于-1，返回NaN
+* `Math.log10`返回以10为底的x的对数。如果x小于0，则返回NaN
+* `Math.log2`返回以2为底的x的对数。如果x小于0，则返回NaN
+```
+Math.sinh -- hyperbolic sine of a number
+Math.cosh -- hyperbolic cosine of a number
+Math.tanh -- hyperbolic tangent of a number
+Math.asinh -- hyperbolic arc-sine of a number
+Math.acosh -- hyperbolic arc-cosine of a number
+Math.atanh -- hyperbolic arc-tangent of a number
+```
+* `Math.hypot`返回所有参数的平方和的平方根
+* `Math.clz32`返回一个数的32位无符号整数形式有多少个前导0
+* `Math.imul`返回两个数以32位带符号整数形式相乘的结果，返回的也是一个32位的带符号整数
+* `Math.fround`返回一个数的单精度浮点数形式
+* Read ES6 Math Additions in Depth
+(back to table of contents)
+
+
+
 [1]: http://babeljs.io/ "Babel JavaScript Compiler"
 [2]: https://github.com/babel/babelify "babel/babelify on GitHub"
 [3]: https://ponyfoo.com/articles/es6-destructuring-in-depth "ES6 Destructuring in Depth on Pony Foo"
