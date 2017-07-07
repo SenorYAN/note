@@ -39,7 +39,7 @@ undefined表示变量不含有值，变量设置成null视作清空变量。
 阻止向对象添加新的属性。
 * Object.**seal**()
 阻止修改属性，并组织添加新属性
-* Object.setPrototypeOf()
+* Object.**setPrototypeOf**()
 设置一个对象的原型，可用此方法进行原型继承
 * Object.**values**() 
 Returns an array of a given object's own enumerable values.
