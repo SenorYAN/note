@@ -29,3 +29,36 @@
 	* 使用 全等运算符（===）测试是否全等。
 * assert.throws(block[, error][, message])
 	* 期望 block 函数抛出错误。如果指定了 error，error 可以是构造函数、正则表达式、或自定义的验证函数。如果指定了 message，则当 block 不抛出错误时，message 会作为 AssertionError 的错误信息。
+
+# HTTP
+* http
+	* 接收到的原始消息头保存在 rawHeaders 属性中，它是一个 [key, value, key2, value2, ...] 数组
+* http.Agent 类
+	* 负责为 HTTP 客户端管理连接的持续与复用，维护着一个等待请求的队列，且为每个请求重复使用一个单一的 socket 连接直到队列为空，此时 socket 会被销毁或被放入一个连接池中，在连接池中等待被有着相同主机与端口的请求再次使用。 是否被销毁或被放入连接池取决于 keepAlive 选项
+* 待续
+
+# URL
+* auth
+	* url的用户名和密码部分
+* hash
+	* url碎片部分，包含#
+* host
+	* url主机部分，包含端口
+* hostname
+	* 不包括port的host的小写主机名部分
+* href
+	* 整个url
+* path
+	* pathname+search
+* pathname
+	* 包含url的整个路径部分
+* port
+	* 端口
+* protocol
+	* 小写的协议体制
+* query
+	* 不包含？的查询字符串，这个属性是字符串还是对象由`url.parse()` 的`parseQueryString`参数决定
+* search
+	* 包含？的查询字符串
+* slashes
+	* 布尔值，如果 protocol 中的冒号后面跟着两个 ASCII 斜杠字符（/），则值为 true
