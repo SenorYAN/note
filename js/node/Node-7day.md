@@ -41,3 +41,27 @@ NodeJS通过fs内置模块提供对文件的操作。fs模块提供的API基本�
 * path.parse(path)，返回一个对象，对象的属性表示 path 的元素 
 * path.relative(from, to)，返回从 from 到 to 的相对路径（基于当前工作目录）
 * path.resolve([...paths])，把一个路径或路径片段的序列解析为一个绝对路径
+
+## 网络操作
+* HTTP可以作为两种方式使用，服务器和客户端
+* HTTP请求本质是一个数据流，由headers和body组成
+* 发送给服务器是按照从头到尾的顺序一个字节一个字节的数据流方式传递的
+* http模块创建的服务器在接收到完整的请求头之后，就会调用回调函数
+* request创建客户端发送请求，get请求不需要请求体，有便捷方法http.get()
+* 客户端发送请求，拿到完整响应头之后，调用回调函数
+* https比http要額外處理 SSL证书
+* https比http创建服务器多一个options，key和cert字段指定了使用的私钥和公钥
+* url.parse解析url字符串转换成url对象，并不一定是一个完整的url
+* .parse方法还支持第二个和第三个布尔类型可选参数。第二个参数等于true时，该方法返回的URL对象中，query字段不再是一个字符串，而是一个经过querystring模块转换后的参数对象。第三个参数等于true时，该方法可以正确解析不带协议头的URL
+* format方法把url对象转换成URL字符串
+* resolve方法用于拼接字符串
+* querystring实现url参数字符串与参数对象互换
+* zlib提供了数据解压和压缩
+* 判断accept-coding是否包括支持gzip
+* zlib.gzip方法可以对数据压缩
+* zlib.gunzip解压数据
+* net模块用于创建socket
+* 通过headers对象访问到的HTTP请求头或响应头字段不是驼峰
+* http模块创建的HTTP服务器返回的响应是chunked传输方式
+![](Node-7day/FFE9B9D7-180E-4DC5-B8ED-187A5D3D702E.png)
+
