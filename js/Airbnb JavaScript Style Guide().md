@@ -44,4 +44,39 @@ const foo = function bar() {
 38. 单行返回省略return，多行不省略
 39. 函数单参数不用括号
 40. 避免混淆箭头函数的=>符号
-41. 
+41. 使用class，避免使用prototype
+42. 使用extends来继承
+43. 返回this来链式调用
+44. 重写toString方法没有关系，但是要确保没有副作用
+45. 不要设置没有意义的constructor
+46. 使用模块，import／export比require好
+47. 不要在import中使用通配符*
+48. 不要直接在import中export
+49. 同一个路径import只一次
+50. 不要export可变的绑定引用
+51. 单export时使用export default
+52. 多行import最好换行
+53. webpack的loader不在import中，分离到config文件里
+54. 不使用iterators，用js高位函数代替for…of，for…in等循环
+55. generators暂时不要用，因为暂时还不能很好的编译成es5
+56. 使用generators时，*紧跟在function后面
+57. 调用属性的时候用点操作符，不用[]最好
+58. 当属性名带参数的时候使用[]操作符
+59. 使用`**`来运算次方，不用Math.pow
+60. 总是用const和let来申明变量，避免污染全局空间
+61. 每一个变量都用const，不是一个const用好久
+62. const，let整齐排列，不要混杂在一起
+63. 在合理的位置定义变量，在你需要使用他们的位置
+64. 不要链式申明变量，这会生成全局变量，污染全局命名空间
+65. 避免使用一元增减，类似于++和- - ，使用+=1， 以及-=1
+66. const和let不会变量提升（暂时性死区），var会提到所在作用域的顶端
+67. 变量申明会提升，但是变量赋值不会，函数名也不会提升
+68. 函数声明会提升
+69. 使用严格等，严格不等，而不是==和!=
+70. 条件表达式中，对象=> true，undefined=> false， null => false, boolean => boolean 的值，空字符串=> false
+71. 使用booleans的简写，string和number要严格比较
+72. switch语句中的case最好用大括号括起来
+73. 三元运算符不该嵌套，而且通常单行表示
+74. 避免不必要的三元运算符，用||或者!! 替换
+75. if-else中else放在 if的后半括号的同行
+76. 
