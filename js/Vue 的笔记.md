@@ -1,4 +1,4 @@
-# Vue 的笔记
+# Vue 的笔记 test
 1. 生命周期
 beforeCreate -> created -> beforeMount -> mounted -> (beforeUpdate -> updated )  -> beforeDestroy -> destroyed
 
